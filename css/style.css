@@ -278,7 +278,7 @@ img {
     justify-content: center;
     position: relative;
     overflow: hidden;
-    padding: 120px 24px 80px;
+    padding: 100px 24px 60px;
     background: linear-gradient(180deg, #fafbfd 0%, #f3f4f8 100%);
 }
 
@@ -601,13 +601,13 @@ img {
 
 /* --- Section Styles --- */
 .section {
-    padding: 110px 0;
+    padding: 80px 0;
     position: relative;
 }
 
 .section-header {
     text-align: center;
-    margin-bottom: 65px;
+    margin-bottom: 45px;
 }
 
 .section-tag {
@@ -638,7 +638,7 @@ img {
     width: 50px;
     height: 3px;
     background: var(--accent-gradient);
-    margin: 18px auto 0;
+    margin: 14px auto 0;
     border-radius: 3px;
     position: relative;
 }
@@ -663,7 +663,7 @@ img {
     opacity: 0.25;
     display: block;
     text-align: center;
-    margin-top: 50px;
+    margin-top: 35px;
 }
 
 /* Section decorative divider */
@@ -695,7 +695,7 @@ img {
 .about-grid {
     display: grid;
     grid-template-columns: 1fr 1.2fr;
-    gap: 60px;
+    gap: 40px;
     align-items: start;
 }
 
@@ -703,7 +703,7 @@ img {
     position: relative;
     width: 280px;
     height: 280px;
-    margin: 0 auto 40px;
+    margin: 0 auto 28px;
 }
 
 .about-image-placeholder {
@@ -831,7 +831,7 @@ img {
 .skills-grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    gap: 30px;
+    gap: 24px;
 }
 
 .skill-category {
@@ -961,7 +961,7 @@ img {
 .timeline-item {
     position: relative;
     width: 45%;
-    margin-bottom: 50px;
+    margin-bottom: 35px;
 }
 
 .timeline-item:nth-child(odd) {
@@ -1136,8 +1136,8 @@ img {
 .projects-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 24px;
-    margin-bottom: 60px;
+    gap: 20px;
+    margin-bottom: 40px;
 }
 
 .project-card {
@@ -1287,7 +1287,7 @@ img {
 
 /* Open Source Section */
 .opensource-section {
-    margin-top: 60px;
+    margin-top: 40px;
 }
 
 .opensource-title {
@@ -1308,7 +1308,7 @@ img {
 .opensource-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 20px;
+    gap: 16px;
 }
 
 .opensource-card {
@@ -1369,7 +1369,7 @@ img {
 .education-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 24px;
+    gap: 20px;
 }
 
 .education-card {
@@ -1475,7 +1475,7 @@ img {
 .contact-grid {
     display: grid;
     grid-template-columns: 1fr 1.2fr;
-    gap: 50px;
+    gap: 40px;
     align-items: start;
 }
 
@@ -1691,7 +1691,7 @@ img {
 .blog-grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    gap: 28px;
+    gap: 22px;
 }
 
 .blog-card {
