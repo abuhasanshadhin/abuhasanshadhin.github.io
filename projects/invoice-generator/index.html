@@ -1,0 +1,2632 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Smart Invoice Generator Pro</title>
+    <link
+      rel="icon"
+      href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📄</text></svg>"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+    />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+    <style>
+      :root {
+        --bg: #f4f5f9;
+        --card: #fff;
+        --p: #5b5fc7;
+        --pl: #7b7ef0;
+        --ps: #ececff;
+        --t: #1e1e36;
+        --t2: #52527a;
+        --t3: #8d8daa;
+        --bd: rgba(0, 0, 0, 0.07);
+        --gn: #16a34a;
+        --rd: #dc2626;
+        --r: 12px;
+        --sh: 0 2px 12px rgba(0, 0, 0, 0.05);
+      }
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      body {
+        font-family: "Inter", sans-serif;
+        background: var(--bg);
+        color: var(--t);
+        line-height: 1.6;
+      }
+
+      .hdr {
+        background: var(--card);
+        border-bottom: 1px solid var(--bd);
+        padding: 12px 0;
+        position: sticky;
+        top: 0;
+        z-index: 100;
+        box-shadow: 0 1px 4px rgba(0, 0, 0, 0.03);
+      }
+      .hdr-in {
+        max-width: 1440px;
+        margin: 0 auto;
+        padding: 0 20px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+      .logo {
+        font-family: "JetBrains Mono", monospace;
+        font-size: 1.1rem;
+        font-weight: 700;
+      }
+      .logo i {
+        color: var(--p);
+        margin-right: 8px;
+      }
+      .hdr-act {
+        display: flex;
+        gap: 7px;
+      }
+      .btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        padding: 8px 16px;
+        font-size: 0.82rem;
+        font-weight: 600;
+        border-radius: var(--r);
+        border: none;
+        cursor: pointer;
+        font-family: "Inter", sans-serif;
+        transition: 0.25s;
+      }
+      .btn-p {
+        background: linear-gradient(135deg, #5b5fc7, #7b7ef0);
+        color: #fff;
+        box-shadow: 0 4px 12px rgba(91, 95, 199, 0.25);
+      }
+      .btn-p:hover {
+        transform: translateY(-1px);
+        box-shadow: 0 6px 18px rgba(91, 95, 199, 0.35);
+      }
+      .btn-o {
+        background: transparent;
+        color: var(--t);
+        border: 1.5px solid var(--bd);
+      }
+      .btn-o:hover {
+        border-color: var(--p);
+        color: var(--p);
+        background: var(--ps);
+      }
+      .btn-g {
+        background: var(--gn);
+        color: #fff;
+      }
+      .btn-g:hover {
+        opacity: 0.9;
+      }
+      .btn-add {
+        display: inline-flex;
+        align-items: center;
+        gap: 5px;
+        padding: 6px 12px;
+        font-size: 0.78rem;
+        font-weight: 600;
+        color: var(--p);
+        background: var(--ps);
+        border: 1px dashed rgba(91, 95, 199, 0.3);
+        border-radius: 8px;
+        cursor: pointer;
+        transition: 0.2s;
+      }
+      .btn-add:hover {
+        background: rgba(91, 95, 199, 0.12);
+        border-color: var(--p);
+      }
+      .btn-add-sm {
+        display: inline-flex;
+        align-items: center;
+        gap: 4px;
+        padding: 4px 10px;
+        font-size: 0.72rem;
+        font-weight: 600;
+        color: var(--p);
+        background: var(--ps);
+        border: 1px dashed rgba(91, 95, 199, 0.3);
+        border-radius: 6px;
+        cursor: pointer;
+        transition: 0.2s;
+      }
+      .btn-add-sm:hover {
+        background: rgba(91, 95, 199, 0.12);
+      }
+
+      .app {
+        max-width: 1440px;
+        margin: 0 auto;
+        padding: 16px;
+        display: grid;
+        grid-template-columns: 500px 1fr;
+        gap: 16px;
+        align-items: start;
+      }
+      .card {
+        background: var(--card);
+        border: 1px solid var(--bd);
+        border-radius: var(--r);
+        box-shadow: var(--sh);
+      }
+      .card-h {
+        padding: 12px 18px;
+        border-bottom: 1px solid var(--bd);
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+      .card-h h2 {
+        font-size: 0.88rem;
+        font-weight: 700;
+        display: flex;
+        align-items: center;
+        gap: 7px;
+      }
+      .card-h h2 i {
+        color: var(--p);
+        font-size: 0.95rem;
+      }
+      .card-b {
+        padding: 16px 18px;
+      }
+      .form-panel {
+        max-height: calc(100vh - 76px);
+        overflow-y: auto;
+        position: sticky;
+        top: 68px;
+      }
+      .form-panel::-webkit-scrollbar {
+        width: 4px;
+      }
+      .form-panel::-webkit-scrollbar-thumb {
+        background: var(--bd);
+        border-radius: 4px;
+      }
+      .preview-panel {
+        position: sticky;
+        top: 68px;
+        max-height: calc(100vh - 76px);
+        overflow-y: auto;
+      }
+      .preview-panel::-webkit-scrollbar {
+        width: 4px;
+      }
+      .preview-panel::-webkit-scrollbar-thumb {
+        background: var(--bd);
+        border-radius: 4px;
+      }
+
+      .sec {
+        margin-bottom: 14px;
+      }
+      .sec-t {
+        font-size: 0.72rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        color: var(--p);
+        margin-bottom: 8px;
+        padding-bottom: 5px;
+        border-bottom: 1px solid var(--bd);
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+      .sec-t-left {
+        display: flex;
+        align-items: center;
+        gap: 5px;
+      }
+      .sec-t-left i {
+        font-size: 0.8rem;
+      }
+      .sec-cfg-btn {
+        background: none;
+        border: none;
+        color: var(--t3);
+        cursor: pointer;
+        font-size: 0.85rem;
+        padding: 3px 6px;
+        border-radius: 5px;
+        transition: 0.2s;
+      }
+      .sec-cfg-btn:hover {
+        color: var(--p);
+        background: var(--ps);
+      }
+      .row {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 8px;
+        margin-bottom: 8px;
+      }
+      .fg {
+        margin-bottom: 8px;
+      }
+      .fg label {
+        display: block;
+        font-size: 0.75rem;
+        font-weight: 600;
+        color: var(--t2);
+        margin-bottom: 3px;
+      }
+      .fg input,
+      .fg select,
+      .fg textarea {
+        width: 100%;
+        padding: 7px 10px;
+        border: 1.5px solid var(--bd);
+        border-radius: 8px;
+        font-family: "Inter", sans-serif;
+        font-size: 0.82rem;
+        color: var(--t);
+        background: #fff;
+        transition: 0.2s;
+        outline: none;
+      }
+      .fg input:focus,
+      .fg select:focus,
+      .fg textarea:focus {
+        border-color: var(--p);
+        box-shadow: 0 0 0 3px rgba(91, 95, 199, 0.08);
+      }
+      .fg textarea {
+        resize: vertical;
+        min-height: 44px;
+      }
+
+      /* Template Grid */
+      .tpl-grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 6px;
+        margin-bottom: 6px;
+      }
+      .tpl-opt {
+        border: 2px solid var(--bd);
+        border-radius: 8px;
+        padding: 8px 4px;
+        text-align: center;
+        cursor: pointer;
+        transition: 0.25s;
+        position: relative;
+      }
+      .tpl-opt:hover {
+        border-color: var(--pl);
+      }
+      .tpl-opt.active {
+        border-color: var(--p);
+        background: var(--ps);
+      }
+      .tpl-opt.active::after {
+        content: "✓";
+        position: absolute;
+        top: -5px;
+        right: -5px;
+        background: var(--p);
+        color: #fff;
+        width: 16px;
+        height: 16px;
+        border-radius: 50%;
+        font-size: 0.6rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: 700;
+      }
+      .tpl-icon {
+        font-size: 1.1rem;
+        display: block;
+        margin-bottom: 2px;
+      }
+      .tpl-name {
+        font-size: 0.62rem;
+        font-weight: 600;
+        color: var(--t2);
+      }
+
+      /* Config Popover */
+      .cfg-pop {
+        background: var(--card);
+        border: 1px solid var(--bd);
+        border-radius: 10px;
+        padding: 12px;
+        margin-bottom: 10px;
+        box-shadow: var(--sh);
+        display: none;
+        animation: fadeIn 0.2s ease;
+      }
+      .cfg-pop.open {
+        display: block;
+      }
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(-4px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+      .cfg-pop-title {
+        font-size: 0.72rem;
+        font-weight: 700;
+        color: var(--p);
+        margin-bottom: 8px;
+        display: flex;
+        align-items: center;
+        gap: 5px;
+      }
+      .cfg-chip {
+        display: inline-flex;
+        align-items: center;
+        gap: 4px;
+        padding: 4px 9px;
+        font-size: 0.72rem;
+        font-weight: 600;
+        border-radius: 16px;
+        cursor: pointer;
+        transition: 0.2s;
+        border: 1.5px solid var(--bd);
+        background: #fff;
+        color: var(--t2);
+        user-select: none;
+        margin: 2px;
+      }
+      .cfg-chip:hover {
+        border-color: var(--pl);
+      }
+      .cfg-chip.active {
+        background: var(--p);
+        color: #fff;
+        border-color: var(--p);
+      }
+      .cfg-chip i {
+        font-size: 0.65rem;
+      }
+      .cfg-chip.locked {
+        opacity: 0.6;
+        cursor: default;
+      }
+      .cfg-divider {
+        height: 1px;
+        background: var(--bd);
+        margin: 8px 0;
+      }
+      .cfg-custom-row {
+        display: flex;
+        gap: 6px;
+        align-items: center;
+        margin-top: 6px;
+      }
+      .cfg-custom-row input {
+        flex: 1;
+        padding: 5px 8px;
+        border: 1.5px solid var(--bd);
+        border-radius: 6px;
+        font-size: 0.75rem;
+        font-family: "Inter", sans-serif;
+        outline: none;
+      }
+      .cfg-custom-row input:focus {
+        border-color: var(--p);
+      }
+      .cfg-custom-row select {
+        padding: 5px 6px;
+        border: 1.5px solid var(--bd);
+        border-radius: 6px;
+        font-size: 0.72rem;
+        font-family: "Inter", sans-serif;
+        outline: none;
+      }
+      .cfg-custom-row button {
+        padding: 5px 10px;
+        border: none;
+        background: var(--p);
+        color: #fff;
+        border-radius: 6px;
+        font-size: 0.72rem;
+        cursor: pointer;
+        font-weight: 600;
+      }
+
+      /* Column Config */
+      .col-config {
+        background: var(--ps);
+        border: 1px solid rgba(91, 95, 199, 0.15);
+        border-radius: 8px;
+        padding: 10px;
+        margin-bottom: 10px;
+      }
+      .col-config-title {
+        font-size: 0.7rem;
+        font-weight: 700;
+        color: var(--p);
+        margin-bottom: 6px;
+        display: flex;
+        align-items: center;
+        gap: 5px;
+      }
+      .col-chips {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 5px;
+      }
+
+      /* Items Table */
+      .itbl {
+        width: 100%;
+        border-collapse: collapse;
+        margin-bottom: 8px;
+        table-layout: fixed;
+      }
+      .itbl th {
+        font-size: 0.68rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.03em;
+        color: var(--t3);
+        padding: 6px 5px;
+        text-align: left;
+        border-bottom: 1px solid var(--bd);
+      }
+      .itbl th.r {
+        text-align: right;
+      }
+      .itbl td {
+        padding: 3px 2px;
+        vertical-align: middle;
+      }
+      .itbl td.r {
+        text-align: right;
+      }
+      .itbl input {
+        width: 100%;
+        padding: 6px 7px;
+        border: 1.5px solid var(--bd);
+        border-radius: 6px;
+        font-family: "Inter", sans-serif;
+        font-size: 0.8rem;
+        color: var(--t);
+        outline: none;
+        transition: 0.2s;
+      }
+      .itbl input:focus {
+        border-color: var(--p);
+      }
+      .itbl .amt {
+        font-family: "JetBrains Mono", monospace;
+        font-size: 0.8rem;
+        font-weight: 500;
+        color: var(--t2);
+        text-align: right;
+        padding-right: 6px;
+      }
+      .del-r {
+        background: none;
+        border: none;
+        color: var(--rd);
+        cursor: pointer;
+        font-size: 0.8rem;
+        padding: 4px;
+        border-radius: 5px;
+        transition: 0.2s;
+      }
+      .del-r:hover {
+        background: rgba(220, 38, 38, 0.08);
+      }
+
+      .totals {
+        margin-top: 10px;
+        border-top: 1px solid var(--bd);
+        padding-top: 8px;
+      }
+      .tot-r {
+        display: flex;
+        justify-content: space-between;
+        padding: 3px 0;
+        font-size: 0.82rem;
+      }
+      .tot-r.grand {
+        font-weight: 800;
+        font-size: 0.95rem;
+        color: var(--p);
+        border-top: 2px solid var(--p);
+        margin-top: 4px;
+        padding-top: 6px;
+      }
+      .tot-l {
+        color: var(--t2);
+      }
+      .tot-v {
+        font-family: "JetBrains Mono", monospace;
+        font-weight: 600;
+      }
+
+      /* ==================== ALL 8 TEMPLATES ==================== */
+      #invoice-preview {
+        font-size: 13px;
+        color: #1a1a2e;
+        background: #fff;
+        padding: 0;
+        min-height: 400px;
+      }
+
+      /* T1: Classic */
+      .tpl-classic .inv-hdr {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        margin-bottom: 22px;
+        padding-bottom: 16px;
+        border-bottom: 3px solid var(--p);
+      }
+      .tpl-classic .inv-brand h1 {
+        font-size: 1.4rem;
+        font-weight: 800;
+        color: var(--p);
+        letter-spacing: -0.5px;
+        margin-bottom: 2px;
+      }
+      .tpl-classic .inv-brand p {
+        font-size: 0.72rem;
+        color: #8d8daa;
+      }
+      .tpl-classic .inv-meta {
+        text-align: right;
+      }
+      .tpl-classic .inv-num {
+        font-family: "JetBrains Mono", monospace;
+        font-size: 0.95rem;
+        font-weight: 700;
+        color: var(--p);
+        margin-bottom: 2px;
+      }
+      .tpl-classic .inv-meta p {
+        font-size: 0.78rem;
+        color: #52527a;
+      }
+      .tpl-classic .inv-parties {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 18px;
+        margin-bottom: 18px;
+      }
+      .tpl-classic .inv-party h3 {
+        font-size: 0.65rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        color: var(--p);
+        margin-bottom: 4px;
+      }
+      .tpl-classic .inv-party .nm {
+        font-weight: 700;
+        font-size: 0.88rem;
+        margin-bottom: 2px;
+      }
+      .tpl-classic .inv-party .dt {
+        font-size: 0.78rem;
+        color: #52527a;
+        line-height: 1.5;
+      }
+      .tpl-classic .inv-tbl {
+        width: 100%;
+        border-collapse: collapse;
+        margin-bottom: 16px;
+      }
+      .tpl-classic .inv-tbl thead th {
+        background: var(--p);
+        color: #fff;
+        padding: 8px 10px;
+        font-size: 0.65rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.04em;
+        text-align: left;
+      }
+      .tpl-classic .inv-tbl thead th.r {
+        text-align: right;
+      }
+      .tpl-classic .inv-tbl thead th:first-child {
+        border-radius: 7px 0 0 0;
+      }
+      .tpl-classic .inv-tbl thead th:last-child {
+        border-radius: 0 7px 0 0;
+      }
+      .tpl-classic .inv-tbl tbody td {
+        padding: 8px 10px;
+        font-size: 0.8rem;
+        border-bottom: 1px solid #eef0f5;
+      }
+      .tpl-classic .inv-tbl tbody td.r {
+        text-align: right;
+        font-family: "JetBrains Mono", monospace;
+      }
+      .tpl-classic .inv-tbl tbody tr:nth-child(even) {
+        background: #fafbfd;
+      }
+      .tpl-classic .inv-totals {
+        display: flex;
+        justify-content: flex-end;
+        margin-bottom: 16px;
+      }
+      .tpl-classic .inv-tot-box {
+        width: 200px;
+      }
+      .tpl-classic .inv-tot-r {
+        display: flex;
+        justify-content: space-between;
+        padding: 3px 0;
+        font-size: 0.8rem;
+      }
+      .tpl-classic .inv-tot-r.grand {
+        font-weight: 800;
+        font-size: 0.92rem;
+        color: var(--p);
+        border-top: 2px solid var(--p);
+        margin-top: 4px;
+        padding-top: 6px;
+      }
+      .tpl-classic .inv-tot-l {
+        color: #52527a;
+      }
+      .tpl-classic .inv-tot-v {
+        font-family: "JetBrains Mono", monospace;
+      }
+
+      /* T2: Modern */
+      .tpl-modern .inv-hdr {
+        background: linear-gradient(135deg, #5b5fc7, #7b7ef0);
+        color: #fff;
+        padding: 22px 24px;
+        border-radius: 10px;
+        margin-bottom: 22px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+      .tpl-modern .inv-brand h1 {
+        font-size: 1.4rem;
+        font-weight: 800;
+        margin-bottom: 2px;
+      }
+      .tpl-modern .inv-brand p {
+        font-size: 0.72rem;
+        opacity: 0.8;
+      }
+      .tpl-modern .inv-meta {
+        text-align: right;
+      }
+      .tpl-modern .inv-num {
+        font-family: "JetBrains Mono", monospace;
+        font-size: 0.95rem;
+        font-weight: 700;
+        margin-bottom: 2px;
+      }
+      .tpl-modern .inv-meta p {
+        font-size: 0.78rem;
+        opacity: 0.85;
+      }
+      .tpl-modern .inv-parties {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 18px;
+        margin-bottom: 18px;
+      }
+      .tpl-modern .inv-party {
+        background: #f8f9fc;
+        padding: 14px;
+        border-radius: 8px;
+        border-left: 3px solid var(--p);
+      }
+      .tpl-modern .inv-party h3 {
+        font-size: 0.65rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        color: var(--p);
+        margin-bottom: 4px;
+      }
+      .tpl-modern .inv-party .nm {
+        font-weight: 700;
+        font-size: 0.88rem;
+        margin-bottom: 2px;
+      }
+      .tpl-modern .inv-party .dt {
+        font-size: 0.78rem;
+        color: #52527a;
+        line-height: 1.5;
+      }
+      .tpl-modern .inv-tbl {
+        width: 100%;
+        border-collapse: collapse;
+        margin-bottom: 16px;
+        border-radius: 8px;
+        overflow: hidden;
+      }
+      .tpl-modern .inv-tbl thead th {
+        background: #f0f1f8;
+        color: var(--p);
+        padding: 8px 10px;
+        font-size: 0.65rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.04em;
+        text-align: left;
+        border-bottom: 2px solid #e0e2ed;
+      }
+      .tpl-modern .inv-tbl thead th.r {
+        text-align: right;
+      }
+      .tpl-modern .inv-tbl tbody td {
+        padding: 8px 10px;
+        font-size: 0.8rem;
+        border-bottom: 1px solid #f0f1f5;
+      }
+      .tpl-modern .inv-tbl tbody td.r {
+        text-align: right;
+        font-family: "JetBrains Mono", monospace;
+      }
+      .tpl-modern .inv-totals {
+        display: flex;
+        justify-content: flex-end;
+        margin-bottom: 16px;
+      }
+      .tpl-modern .inv-tot-box {
+        width: 200px;
+      }
+      .tpl-modern .inv-tot-r {
+        display: flex;
+        justify-content: space-between;
+        padding: 3px 0;
+        font-size: 0.8rem;
+      }
+      .tpl-modern .inv-tot-r.grand {
+        font-weight: 800;
+        font-size: 0.92rem;
+        color: #fff;
+        background: linear-gradient(135deg, #5b5fc7, #7b7ef0);
+        margin-top: 4px;
+        padding: 7px 10px;
+        border-radius: 7px;
+      }
+      .tpl-modern .inv-tot-l {
+        color: #52527a;
+      }
+      .tpl-modern .inv-tot-r.grand .inv-tot-l {
+        color: #fff;
+      }
+      .tpl-modern .inv-tot-v {
+        font-family: "JetBrains Mono", monospace;
+      }
+
+      /* T3: Minimal */
+      .tpl-minimal .inv-hdr {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-end;
+        margin-bottom: 28px;
+        padding-bottom: 14px;
+        border-bottom: 1px solid #e0e0e0;
+      }
+      .tpl-minimal .inv-brand h1 {
+        font-size: 1.25rem;
+        font-weight: 800;
+        letter-spacing: -0.5px;
+        color: #1a1a2e;
+      }
+      .tpl-minimal .inv-brand p {
+        font-size: 0.72rem;
+        color: #999;
+      }
+      .tpl-minimal .inv-meta {
+        text-align: right;
+      }
+      .tpl-minimal .inv-num {
+        font-size: 0.88rem;
+        font-weight: 700;
+        color: #555;
+        margin-bottom: 2px;
+      }
+      .tpl-minimal .inv-meta p {
+        font-size: 0.75rem;
+        color: #888;
+      }
+      .tpl-minimal .inv-parties {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 22px;
+        margin-bottom: 24px;
+      }
+      .tpl-minimal .inv-party h3 {
+        font-size: 0.62rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        color: #aaa;
+        margin-bottom: 4px;
+      }
+      .tpl-minimal .inv-party .nm {
+        font-weight: 700;
+        font-size: 0.85rem;
+        margin-bottom: 2px;
+      }
+      .tpl-minimal .inv-party .dt {
+        font-size: 0.75rem;
+        color: #777;
+        line-height: 1.5;
+      }
+      .tpl-minimal .inv-tbl {
+        width: 100%;
+        border-collapse: collapse;
+        margin-bottom: 20px;
+      }
+      .tpl-minimal .inv-tbl thead th {
+        padding: 7px 0;
+        font-size: 0.62rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        color: #aaa;
+        text-align: left;
+        border-bottom: 1px solid #ddd;
+      }
+      .tpl-minimal .inv-tbl thead th.r {
+        text-align: right;
+      }
+      .tpl-minimal .inv-tbl tbody td {
+        padding: 8px 0;
+        font-size: 0.8rem;
+        border-bottom: 1px solid #f0f0f0;
+      }
+      .tpl-minimal .inv-tbl tbody td.r {
+        text-align: right;
+        font-family: "JetBrains Mono", monospace;
+      }
+      .tpl-minimal .inv-totals {
+        display: flex;
+        justify-content: flex-end;
+        margin-bottom: 20px;
+      }
+      .tpl-minimal .inv-tot-box {
+        width: 190px;
+      }
+      .tpl-minimal .inv-tot-r {
+        display: flex;
+        justify-content: space-between;
+        padding: 3px 0;
+        font-size: 0.8rem;
+      }
+      .tpl-minimal .inv-tot-r.grand {
+        font-weight: 800;
+        font-size: 0.92rem;
+        border-top: 1px solid #1a1a2e;
+        margin-top: 5px;
+        padding-top: 6px;
+      }
+      .tpl-minimal .inv-tot-l {
+        color: #777;
+      }
+      .tpl-minimal .inv-tot-v {
+        font-family: "JetBrains Mono", monospace;
+      }
+
+      /* T4: Bold */
+      .tpl-bold .inv-hdr {
+        background: #1a1a2e;
+        color: #fff;
+        padding: 24px;
+        border-radius: 10px;
+        margin-bottom: 22px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+      .tpl-bold .inv-brand h1 {
+        font-size: 1.5rem;
+        font-weight: 900;
+        letter-spacing: -0.5px;
+      }
+      .tpl-bold .inv-brand p {
+        font-size: 0.72rem;
+        opacity: 0.6;
+      }
+      .tpl-bold .inv-meta {
+        text-align: right;
+      }
+      .tpl-bold .inv-num {
+        font-family: "JetBrains Mono", monospace;
+        font-size: 1.05rem;
+        font-weight: 700;
+        color: #6ee7b7;
+        margin-bottom: 2px;
+      }
+      .tpl-bold .inv-meta p {
+        font-size: 0.78rem;
+        opacity: 0.7;
+      }
+      .tpl-bold .inv-parties {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 18px;
+        margin-bottom: 18px;
+      }
+      .tpl-bold .inv-party {
+        padding: 12px;
+        border: 2px solid #1a1a2e;
+        border-radius: 8px;
+      }
+      .tpl-bold .inv-party h3 {
+        font-size: 0.65rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        color: #1a1a2e;
+        margin-bottom: 4px;
+      }
+      .tpl-bold .inv-party .nm {
+        font-weight: 700;
+        font-size: 0.88rem;
+        margin-bottom: 2px;
+      }
+      .tpl-bold .inv-party .dt {
+        font-size: 0.78rem;
+        color: #555;
+        line-height: 1.5;
+      }
+      .tpl-bold .inv-tbl {
+        width: 100%;
+        border-collapse: collapse;
+        margin-bottom: 16px;
+      }
+      .tpl-bold .inv-tbl thead th {
+        background: #1a1a2e;
+        color: #6ee7b7;
+        padding: 8px 10px;
+        font-size: 0.65rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.04em;
+        text-align: left;
+      }
+      .tpl-bold .inv-tbl thead th.r {
+        text-align: right;
+      }
+      .tpl-bold .inv-tbl thead th:first-child {
+        border-radius: 7px 0 0 0;
+      }
+      .tpl-bold .inv-tbl thead th:last-child {
+        border-radius: 0 7px 0 0;
+      }
+      .tpl-bold .inv-tbl tbody td {
+        padding: 8px 10px;
+        font-size: 0.8rem;
+        border-bottom: 1px solid #eee;
+      }
+      .tpl-bold .inv-tbl tbody td.r {
+        text-align: right;
+        font-family: "JetBrains Mono", monospace;
+      }
+      .tpl-bold .inv-tbl tbody tr:nth-child(even) {
+        background: #f9fafb;
+      }
+      .tpl-bold .inv-totals {
+        display: flex;
+        justify-content: flex-end;
+        margin-bottom: 16px;
+      }
+      .tpl-bold .inv-tot-box {
+        width: 200px;
+      }
+      .tpl-bold .inv-tot-r {
+        display: flex;
+        justify-content: space-between;
+        padding: 3px 0;
+        font-size: 0.8rem;
+      }
+      .tpl-bold .inv-tot-r.grand {
+        font-weight: 800;
+        font-size: 0.92rem;
+        background: #1a1a2e;
+        color: #6ee7b7;
+        margin-top: 4px;
+        padding: 7px 10px;
+        border-radius: 7px;
+      }
+      .tpl-bold .inv-tot-l {
+        color: #555;
+      }
+      .tpl-bold .inv-tot-r.grand .inv-tot-l {
+        color: #6ee7b7;
+      }
+      .tpl-bold .inv-tot-v {
+        font-family: "JetBrains Mono", monospace;
+      }
+
+      /* T5: Corporate */
+      .tpl-corporate .inv-hdr {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        margin-bottom: 22px;
+        padding-bottom: 16px;
+        border-bottom: 2px solid #1a1a2e;
+      }
+      .tpl-corporate .inv-brand h1 {
+        font-size: 1.4rem;
+        font-weight: 900;
+        color: #1a1a2e;
+        letter-spacing: -0.5px;
+        text-transform: uppercase;
+      }
+      .tpl-corporate .inv-brand p {
+        font-size: 0.72rem;
+        color: #888;
+      }
+      .tpl-corporate .inv-meta {
+        text-align: right;
+      }
+      .tpl-corporate .inv-num {
+        font-family: "JetBrains Mono", monospace;
+        font-size: 0.95rem;
+        font-weight: 700;
+        color: #1a1a2e;
+        margin-bottom: 2px;
+      }
+      .tpl-corporate .inv-meta p {
+        font-size: 0.78rem;
+        color: #666;
+      }
+      .tpl-corporate .inv-parties {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 18px;
+        margin-bottom: 18px;
+      }
+      .tpl-corporate .inv-party h3 {
+        font-size: 0.65rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        color: #1a1a2e;
+        margin-bottom: 4px;
+        padding-bottom: 3px;
+        border-bottom: 2px solid #e0e0e0;
+      }
+      .tpl-corporate .inv-party .nm {
+        font-weight: 700;
+        font-size: 0.88rem;
+        margin-bottom: 2px;
+      }
+      .tpl-corporate .inv-party .dt {
+        font-size: 0.78rem;
+        color: #555;
+        line-height: 1.5;
+      }
+      .tpl-corporate .inv-tbl {
+        width: 100%;
+        border-collapse: collapse;
+        margin-bottom: 16px;
+      }
+      .tpl-corporate .inv-tbl thead th {
+        background: #f5f5f5;
+        color: #1a1a2e;
+        padding: 8px 10px;
+        font-size: 0.65rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.04em;
+        text-align: left;
+        border-bottom: 2px solid #1a1a2e;
+      }
+      .tpl-corporate .inv-tbl thead th.r {
+        text-align: right;
+      }
+      .tpl-corporate .inv-tbl tbody td {
+        padding: 8px 10px;
+        font-size: 0.8rem;
+        border-bottom: 1px solid #eee;
+      }
+      .tpl-corporate .inv-tbl tbody td.r {
+        text-align: right;
+        font-family: "JetBrains Mono", monospace;
+      }
+      .tpl-corporate .inv-totals {
+        display: flex;
+        justify-content: flex-end;
+        margin-bottom: 16px;
+      }
+      .tpl-corporate .inv-tot-box {
+        width: 200px;
+      }
+      .tpl-corporate .inv-tot-r {
+        display: flex;
+        justify-content: space-between;
+        padding: 3px 0;
+        font-size: 0.8rem;
+      }
+      .tpl-corporate .inv-tot-r.grand {
+        font-weight: 800;
+        font-size: 0.92rem;
+        color: #1a1a2e;
+        border-top: 2px solid #1a1a2e;
+        margin-top: 4px;
+        padding-top: 6px;
+      }
+      .tpl-corporate .inv-tot-l {
+        color: #555;
+      }
+      .tpl-corporate .inv-tot-v {
+        font-family: "JetBrains Mono", monospace;
+      }
+
+      /* T6: Elegant */
+      .tpl-elegant .inv-hdr {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        margin-bottom: 22px;
+        padding-bottom: 16px;
+        border-bottom: 1px solid #d4af37;
+      }
+      .tpl-elegant .inv-brand h1 {
+        font-size: 1.4rem;
+        font-weight: 300;
+        color: #2c2c2c;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+      }
+      .tpl-elegant .inv-brand p {
+        font-size: 0.72rem;
+        color: #999;
+        letter-spacing: 0.5px;
+      }
+      .tpl-elegant .inv-meta {
+        text-align: right;
+      }
+      .tpl-elegant .inv-num {
+        font-family: "JetBrains Mono", monospace;
+        font-size: 0.95rem;
+        font-weight: 700;
+        color: #d4af37;
+        margin-bottom: 2px;
+      }
+      .tpl-elegant .inv-meta p {
+        font-size: 0.78rem;
+        color: #888;
+      }
+      .tpl-elegant .inv-parties {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 18px;
+        margin-bottom: 18px;
+      }
+      .tpl-elegant .inv-party h3 {
+        font-size: 0.65rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        color: #d4af37;
+        margin-bottom: 4px;
+      }
+      .tpl-elegant .inv-party .nm {
+        font-weight: 700;
+        font-size: 0.88rem;
+        margin-bottom: 2px;
+        color: #2c2c2c;
+      }
+      .tpl-elegant .inv-party .dt {
+        font-size: 0.78rem;
+        color: #777;
+        line-height: 1.5;
+      }
+      .tpl-elegant .inv-tbl {
+        width: 100%;
+        border-collapse: collapse;
+        margin-bottom: 16px;
+      }
+      .tpl-elegant .inv-tbl thead th {
+        background: #faf8f0;
+        color: #2c2c2c;
+        padding: 8px 10px;
+        font-size: 0.65rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.06em;
+        text-align: left;
+        border-bottom: 1px solid #d4af37;
+      }
+      .tpl-elegant .inv-tbl thead th.r {
+        text-align: right;
+      }
+      .tpl-elegant .inv-tbl tbody td {
+        padding: 8px 10px;
+        font-size: 0.8rem;
+        border-bottom: 1px solid #f0ece0;
+      }
+      .tpl-elegant .inv-tbl tbody td.r {
+        text-align: right;
+        font-family: "JetBrains Mono", monospace;
+      }
+      .tpl-elegant .inv-tbl tbody tr:nth-child(even) {
+        background: #fdfcf8;
+      }
+      .tpl-elegant .inv-totals {
+        display: flex;
+        justify-content: flex-end;
+        margin-bottom: 16px;
+      }
+      .tpl-elegant .inv-tot-box {
+        width: 200px;
+      }
+      .tpl-elegant .inv-tot-r {
+        display: flex;
+        justify-content: space-between;
+        padding: 3px 0;
+        font-size: 0.8rem;
+      }
+      .tpl-elegant .inv-tot-r.grand {
+        font-weight: 800;
+        font-size: 0.92rem;
+        color: #d4af37;
+        border-top: 1px solid #d4af37;
+        margin-top: 4px;
+        padding-top: 6px;
+      }
+      .tpl-elegant .inv-tot-l {
+        color: #777;
+      }
+      .tpl-elegant .inv-tot-v {
+        font-family: "JetBrains Mono", monospace;
+      }
+
+      /* T7: Creative */
+      .tpl-creative .inv-hdr {
+        background: linear-gradient(135deg, #f97316, #ec4899, #8b5cf6);
+        color: #fff;
+        padding: 24px;
+        border-radius: 12px;
+        margin-bottom: 22px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+      .tpl-creative .inv-brand h1 {
+        font-size: 1.5rem;
+        font-weight: 900;
+        letter-spacing: -0.5px;
+      }
+      .tpl-creative .inv-brand p {
+        font-size: 0.72rem;
+        opacity: 0.85;
+      }
+      .tpl-creative .inv-meta {
+        text-align: right;
+      }
+      .tpl-creative .inv-num {
+        font-family: "JetBrains Mono", monospace;
+        font-size: 1rem;
+        font-weight: 700;
+        margin-bottom: 2px;
+      }
+      .tpl-creative .inv-meta p {
+        font-size: 0.78rem;
+        opacity: 0.85;
+      }
+      .tpl-creative .inv-parties {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 18px;
+        margin-bottom: 18px;
+      }
+      .tpl-creative .inv-party {
+        padding: 14px;
+        border-radius: 10px;
+        background: linear-gradient(135deg, #fff7ed, #fdf2f8, #f5f3ff);
+      }
+      .tpl-creative .inv-party h3 {
+        font-size: 0.65rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        color: #8b5cf6;
+        margin-bottom: 4px;
+      }
+      .tpl-creative .inv-party .nm {
+        font-weight: 700;
+        font-size: 0.88rem;
+        margin-bottom: 2px;
+      }
+      .tpl-creative .inv-party .dt {
+        font-size: 0.78rem;
+        color: #555;
+        line-height: 1.5;
+      }
+      .tpl-creative .inv-tbl {
+        width: 100%;
+        border-collapse: collapse;
+        margin-bottom: 16px;
+        border-radius: 10px;
+        overflow: hidden;
+      }
+      .tpl-creative .inv-tbl thead th {
+        background: linear-gradient(135deg, #f97316, #ec4899);
+        color: #fff;
+        padding: 8px 10px;
+        font-size: 0.65rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.04em;
+        text-align: left;
+      }
+      .tpl-creative .inv-tbl thead th.r {
+        text-align: right;
+      }
+      .tpl-creative .inv-tbl thead th:first-child {
+        border-radius: 8px 0 0 0;
+      }
+      .tpl-creative .inv-tbl thead th:last-child {
+        border-radius: 0 8px 0 0;
+      }
+      .tpl-creative .inv-tbl tbody td {
+        padding: 8px 10px;
+        font-size: 0.8rem;
+        border-bottom: 1px solid #f5f0ff;
+      }
+      .tpl-creative .inv-tbl tbody td.r {
+        text-align: right;
+        font-family: "JetBrains Mono", monospace;
+      }
+      .tpl-creative .inv-tbl tbody tr:nth-child(even) {
+        background: #fdf8ff;
+      }
+      .tpl-creative .inv-totals {
+        display: flex;
+        justify-content: flex-end;
+        margin-bottom: 16px;
+      }
+      .tpl-creative .inv-tot-box {
+        width: 200px;
+      }
+      .tpl-creative .inv-tot-r {
+        display: flex;
+        justify-content: space-between;
+        padding: 3px 0;
+        font-size: 0.8rem;
+      }
+      .tpl-creative .inv-tot-r.grand {
+        font-weight: 800;
+        font-size: 0.92rem;
+        color: #fff;
+        background: linear-gradient(135deg, #f97316, #ec4899, #8b5cf6);
+        margin-top: 4px;
+        padding: 7px 10px;
+        border-radius: 7px;
+      }
+      .tpl-creative .inv-tot-l {
+        color: #555;
+      }
+      .tpl-creative .inv-tot-r.grand .inv-tot-l {
+        color: #fff;
+      }
+      .tpl-creative .inv-tot-v {
+        font-family: "JetBrains Mono", monospace;
+      }
+
+      /* T8: Gradient */
+      .tpl-gradient .inv-hdr {
+        background: linear-gradient(135deg, #0ea5e9, #6366f1);
+        color: #fff;
+        padding: 24px;
+        border-radius: 10px;
+        margin-bottom: 22px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+      .tpl-gradient .inv-brand h1 {
+        font-size: 1.4rem;
+        font-weight: 800;
+        letter-spacing: -0.5px;
+      }
+      .tpl-gradient .inv-brand p {
+        font-size: 0.72rem;
+        opacity: 0.8;
+      }
+      .tpl-gradient .inv-meta {
+        text-align: right;
+      }
+      .tpl-gradient .inv-num {
+        font-family: "JetBrains Mono", monospace;
+        font-size: 0.95rem;
+        font-weight: 700;
+        margin-bottom: 2px;
+      }
+      .tpl-gradient .inv-meta p {
+        font-size: 0.78rem;
+        opacity: 0.85;
+      }
+      .tpl-gradient .inv-parties {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 18px;
+        margin-bottom: 18px;
+      }
+      .tpl-gradient .inv-party {
+        padding: 14px;
+        border-radius: 8px;
+        background: #f0f9ff;
+        border-left: 3px solid #0ea5e9;
+      }
+      .tpl-gradient .inv-party h3 {
+        font-size: 0.65rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        color: #0ea5e9;
+        margin-bottom: 4px;
+      }
+      .tpl-gradient .inv-party .nm {
+        font-weight: 700;
+        font-size: 0.88rem;
+        margin-bottom: 2px;
+      }
+      .tpl-gradient .inv-party .dt {
+        font-size: 0.78rem;
+        color: #555;
+        line-height: 1.5;
+      }
+      .tpl-gradient .inv-tbl {
+        width: 100%;
+        border-collapse: collapse;
+        margin-bottom: 16px;
+        border-radius: 8px;
+        overflow: hidden;
+      }
+      .tpl-gradient .inv-tbl thead th {
+        background: linear-gradient(135deg, #0ea5e9, #6366f1);
+        color: #fff;
+        padding: 8px 10px;
+        font-size: 0.65rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.04em;
+        text-align: left;
+      }
+      .tpl-gradient .inv-tbl thead th.r {
+        text-align: right;
+      }
+      .tpl-gradient .inv-tbl thead th:first-child {
+        border-radius: 7px 0 0 0;
+      }
+      .tpl-gradient .inv-tbl thead th:last-child {
+        border-radius: 0 7px 0 0;
+      }
+      .tpl-gradient .inv-tbl tbody td {
+        padding: 8px 10px;
+        font-size: 0.8rem;
+        border-bottom: 1px solid #e0f2fe;
+      }
+      .tpl-gradient .inv-tbl tbody td.r {
+        text-align: right;
+        font-family: "JetBrains Mono", monospace;
+      }
+      .tpl-gradient .inv-tbl tbody tr:nth-child(even) {
+        background: #f0f9ff;
+      }
+      .tpl-gradient .inv-totals {
+        display: flex;
+        justify-content: flex-end;
+        margin-bottom: 16px;
+      }
+      .tpl-gradient .inv-tot-box {
+        width: 200px;
+      }
+      .tpl-gradient .inv-tot-r {
+        display: flex;
+        justify-content: space-between;
+        padding: 3px 0;
+        font-size: 0.8rem;
+      }
+      .tpl-gradient .inv-tot-r.grand {
+        font-weight: 800;
+        font-size: 0.92rem;
+        color: #fff;
+        background: linear-gradient(135deg, #0ea5e9, #6366f1);
+        margin-top: 4px;
+        padding: 7px 10px;
+        border-radius: 7px;
+      }
+      .tpl-gradient .inv-tot-l {
+        color: #555;
+      }
+      .tpl-gradient .inv-tot-r.grand .inv-tot-l {
+        color: #fff;
+      }
+      .tpl-gradient .inv-tot-v {
+        font-family: "JetBrains Mono", monospace;
+      }
+
+      /* Shared */
+      .inv-notes {
+        background: #f8f9fc;
+        border-radius: 7px;
+        padding: 10px 12px;
+        margin-bottom: 14px;
+      }
+      .inv-notes h4 {
+        font-size: 0.68rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        color: #8d8daa;
+        margin-bottom: 2px;
+      }
+      .inv-notes p {
+        font-size: 0.78rem;
+        color: #52527a;
+        white-space: pre-wrap;
+      }
+      .inv-footer {
+        text-align: center;
+        padding-top: 12px;
+        border-top: 1px solid #eef0f5;
+        font-size: 0.72rem;
+        color: #aaa;
+      }
+
+      @media (max-width: 1100px) {
+        .app {
+          grid-template-columns: 1fr;
+        }
+        .form-panel,
+        .preview-panel {
+          position: static;
+          max-height: none;
+        }
+      }
+      @media (max-width: 500px) {
+        .row {
+          grid-template-columns: 1fr;
+        }
+        .hdr-act {
+          flex-wrap: wrap;
+        }
+        .btn {
+          padding: 6px 10px;
+          font-size: 0.75rem;
+        }
+        .tpl-grid {
+          grid-template-columns: repeat(2, 1fr);
+        }
+      }
+      @media print {
+        body {
+          background: #fff;
+        }
+        .hdr,
+        .card:first-child,
+        .card-h {
+          display: none !important;
+        }
+        .app {
+          display: block;
+          padding: 0;
+        }
+        .preview-panel {
+          position: static;
+          box-shadow: none;
+          border: none;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header class="hdr">
+      <div class="hdr-in">
+        <div class="logo">
+          <i class="fas fa-file-invoice-dollar"></i> Smart Invoice Pro
+        </div>
+        <div class="hdr-act">
+          <button class="btn btn-o" onclick="resetForm()">
+            <i class="fas fa-redo"></i> Reset</button
+          ><button class="btn btn-p" onclick="printInvoice()">
+            <i class="fas fa-print"></i> Print</button
+          ><button class="btn btn-g" onclick="downloadPDF()">
+            <i class="fas fa-download"></i> PDF
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <div class="app">
+      <!-- LEFT -->
+      <div class="card form-panel">
+        <div class="card-h">
+          <h2><i class="fas fa-edit"></i> Invoice Builder</h2>
+        </div>
+        <div class="card-b">
+          <!-- TEMPLATE -->
+          <div class="sec">
+            <div class="sec-t">
+              <div class="sec-t-left">
+                <i class="fas fa-palette"></i> Template
+              </div>
+            </div>
+            <div class="tpl-grid" id="tpl-grid">
+              <div
+                class="tpl-opt active"
+                data-tpl="classic"
+                onclick="setTemplate('classic')"
+              >
+                <span class="tpl-icon">📋</span
+                ><span class="tpl-name">Classic</span>
+              </div>
+              <div
+                class="tpl-opt"
+                data-tpl="modern"
+                onclick="setTemplate('modern')"
+              >
+                <span class="tpl-icon">🎨</span
+                ><span class="tpl-name">Modern</span>
+              </div>
+              <div
+                class="tpl-opt"
+                data-tpl="minimal"
+                onclick="setTemplate('minimal')"
+              >
+                <span class="tpl-icon">✨</span
+                ><span class="tpl-name">Minimal</span>
+              </div>
+              <div
+                class="tpl-opt"
+                data-tpl="bold"
+                onclick="setTemplate('bold')"
+              >
+                <span class="tpl-icon">🔥</span
+                ><span class="tpl-name">Bold</span>
+              </div>
+              <div
+                class="tpl-opt"
+                data-tpl="corporate"
+                onclick="setTemplate('corporate')"
+              >
+                <span class="tpl-icon">🏢</span
+                ><span class="tpl-name">Corporate</span>
+              </div>
+              <div
+                class="tpl-opt"
+                data-tpl="elegant"
+                onclick="setTemplate('elegant')"
+              >
+                <span class="tpl-icon">👑</span
+                ><span class="tpl-name">Elegant</span>
+              </div>
+              <div
+                class="tpl-opt"
+                data-tpl="creative"
+                onclick="setTemplate('creative')"
+              >
+                <span class="tpl-icon">🌈</span
+                ><span class="tpl-name">Creative</span>
+              </div>
+              <div
+                class="tpl-opt"
+                data-tpl="gradient"
+                onclick="setTemplate('gradient')"
+              >
+                <span class="tpl-icon">💎</span
+                ><span class="tpl-name">Gradient</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- INVOICE INFO -->
+          <div class="sec">
+            <div class="sec-t">
+              <div class="sec-t-left">
+                <i class="fas fa-info-circle"></i> Invoice Info
+              </div>
+              <button class="sec-cfg-btn" onclick="toggleCfg('invoiceInfo')">
+                <i class="fas fa-cog"></i>
+              </button>
+            </div>
+            <div class="cfg-pop" id="cfg-invoiceInfo">
+              <div class="cfg-pop-title">
+                <i class="fas fa-sliders-h"></i> Toggle fields
+              </div>
+              <div class="cfg-chips" id="cfg-chips-invoiceInfo"></div>
+              <div class="cfg-divider"></div>
+              <div class="cfg-custom-row">
+                <input
+                  type="text"
+                  id="custom-invoiceInfo-name"
+                  placeholder="Field name"
+                /><select id="custom-invoiceInfo-type">
+                  <option value="text">Text</option>
+                  <option value="date">Date</option>
+                  <option value="number">Number</option></select
+                ><button onclick="addCustomField('invoiceInfo')">Add</button>
+              </div>
+            </div>
+            <div id="fields-invoiceInfo"></div>
+          </div>
+
+          <!-- FROM -->
+          <div class="sec">
+            <div class="sec-t">
+              <div class="sec-t-left"><i class="fas fa-user"></i> From</div>
+              <button class="sec-cfg-btn" onclick="toggleCfg('from')">
+                <i class="fas fa-cog"></i>
+              </button>
+            </div>
+            <div class="cfg-pop" id="cfg-from">
+              <div class="cfg-pop-title">
+                <i class="fas fa-sliders-h"></i> Toggle fields
+              </div>
+              <div class="cfg-chips" id="cfg-chips-from"></div>
+              <div class="cfg-divider"></div>
+              <div class="cfg-custom-row">
+                <input
+                  type="text"
+                  id="custom-from-name"
+                  placeholder="Field name"
+                /><select id="custom-from-type">
+                  <option value="text">Text</option>
+                  <option value="textarea">Textarea</option></select
+                ><button onclick="addCustomField('from')">Add</button>
+              </div>
+            </div>
+            <div id="fields-from"></div>
+          </div>
+
+          <!-- TO -->
+          <div class="sec">
+            <div class="sec-t">
+              <div class="sec-t-left">
+                <i class="fas fa-user-tag"></i> Bill To
+              </div>
+              <button class="sec-cfg-btn" onclick="toggleCfg('to')">
+                <i class="fas fa-cog"></i>
+              </button>
+            </div>
+            <div class="cfg-pop" id="cfg-to">
+              <div class="cfg-pop-title">
+                <i class="fas fa-sliders-h"></i> Toggle fields
+              </div>
+              <div class="cfg-chips" id="cfg-chips-to"></div>
+              <div class="cfg-divider"></div>
+              <div class="cfg-custom-row">
+                <input
+                  type="text"
+                  id="custom-to-name"
+                  placeholder="Field name"
+                /><select id="custom-to-type">
+                  <option value="text">Text</option>
+                  <option value="textarea">Textarea</option></select
+                ><button onclick="addCustomField('to')">Add</button>
+              </div>
+            </div>
+            <div id="fields-to"></div>
+          </div>
+
+          <!-- LINE ITEM COLUMNS -->
+          <div class="sec">
+            <div class="sec-t">
+              <div class="sec-t-left">
+                <i class="fas fa-columns"></i> Line Item Columns
+              </div>
+            </div>
+            <div class="col-config">
+              <div class="col-config-title">
+                <i class="fas fa-sliders-h"></i> Toggle columns
+              </div>
+              <div class="col-chips" id="col-chips"></div>
+              <div class="cfg-divider"></div>
+              <div class="cfg-custom-row">
+                <input
+                  type="text"
+                  id="custom-col-name"
+                  placeholder="Column name (e.g. Weight)"
+                /><select id="custom-col-type">
+                  <option value="text">Text</option>
+                  <option value="number">Number</option></select
+                ><button onclick="addCustomCol()">Add Column</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- ITEMS -->
+          <div class="sec">
+            <div class="sec-t">
+              <div class="sec-t-left">
+                <i class="fas fa-list"></i> Line Items
+              </div>
+            </div>
+            <div style="overflow-x: auto">
+              <table class="itbl">
+                <thead id="items-thead"></thead>
+                <tbody id="items-tbody"></tbody>
+              </table>
+            </div>
+            <button class="btn-add" onclick="addRow()">
+              <i class="fas fa-plus"></i> Add Item
+            </button>
+          </div>
+
+          <!-- TAX & DISCOUNT -->
+          <div class="sec">
+            <div class="sec-t">
+              <div class="sec-t-left">
+                <i class="fas fa-percent"></i> Tax & Discount
+              </div>
+            </div>
+            <div class="row">
+              <div class="fg">
+                <label>Tax (%)</label
+                ><input
+                  type="number"
+                  min="0"
+                  max="100"
+                  step="0.01"
+                  id="tax-rate"
+                  value="0"
+                  oninput="render()"
+                />
+              </div>
+              <div class="fg">
+                <label>Discount (%)</label
+                ><input
+                  type="number"
+                  min="0"
+                  max="100"
+                  step="0.01"
+                  id="discount-rate"
+                  value="0"
+                  oninput="render()"
+                />
+              </div>
+            </div>
+          </div>
+
+          <!-- NOTES -->
+          <div class="sec">
+            <div class="sec-t">
+              <div class="sec-t-left">
+                <i class="fas fa-sticky-note"></i> Notes
+              </div>
+              <button class="sec-cfg-btn" onclick="toggleCfg('notes')">
+                <i class="fas fa-cog"></i>
+              </button>
+            </div>
+            <div class="cfg-pop" id="cfg-notes">
+              <div class="cfg-pop-title">
+                <i class="fas fa-sliders-h"></i> Toggle fields
+              </div>
+              <div class="cfg-chips" id="cfg-chips-notes"></div>
+              <div class="cfg-divider"></div>
+              <div class="cfg-custom-row">
+                <input
+                  type="text"
+                  id="custom-notes-name"
+                  placeholder="Field name"
+                /><button onclick="addCustomField('notes')">Add</button>
+              </div>
+            </div>
+            <div id="fields-notes"></div>
+          </div>
+
+          <!-- TOTALS -->
+          <div class="totals">
+            <div class="tot-r">
+              <span class="tot-l">Subtotal</span
+              ><span class="tot-v" id="subtotal">$0.00</span>
+            </div>
+            <div class="tot-r">
+              <span class="tot-l">Discount</span
+              ><span class="tot-v" id="discount-amount">-$0.00</span>
+            </div>
+            <div class="tot-r">
+              <span class="tot-l">Tax</span
+              ><span class="tot-v" id="tax-amount">$0.00</span>
+            </div>
+            <div class="tot-r grand">
+              <span class="tot-l">Total</span
+              ><span class="tot-v" id="grand-total">$0.00</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- RIGHT: Preview -->
+      <div class="card preview-panel">
+        <div class="card-h">
+          <h2><i class="fas fa-eye"></i> Live Preview</h2>
+        </div>
+        <div class="card-b"><div id="invoice-preview"></div></div>
+      </div>
+    </div>
+
+    <script>
+      let currentTemplate = "classic";
+
+      // ========== SECTION FIELD DEFINITIONS ==========
+      const SECTION_DEFS = {
+        invoiceInfo: [
+          {
+            id: "inv-number",
+            label: "Invoice Number",
+            type: "text",
+            placeholder: "INV-001",
+            default: true,
+            locked: true,
+            layout: "half",
+          },
+          {
+            id: "inv-date",
+            label: "Date",
+            type: "date",
+            placeholder: "",
+            default: true,
+            locked: true,
+            layout: "half",
+          },
+          {
+            id: "inv-due",
+            label: "Due Date",
+            type: "date",
+            placeholder: "",
+            default: true,
+            locked: true,
+            layout: "half",
+          },
+          {
+            id: "inv-currency",
+            label: "Currency",
+            type: "select",
+            default: true,
+            locked: true,
+            layout: "half",
+            options: [
+              { v: "$", l: "USD ($)" },
+              { v: "€", l: "EUR (€)" },
+              { v: "£", l: "GBP (£)" },
+              { v: "₹", l: "INR (₹)" },
+              { v: "৳", l: "BDT (৳)" },
+              { v: "¥", l: "JPY (¥)" },
+              { v: "A$", l: "AUD (A$)" },
+              { v: "C$", l: "CAD (C$)" },
+            ],
+          },
+          {
+            id: "inv-po",
+            label: "PO Number",
+            type: "text",
+            placeholder: "PO-001",
+            default: false,
+            layout: "half",
+          },
+          {
+            id: "inv-ref",
+            label: "Reference",
+            type: "text",
+            placeholder: "REF-001",
+            default: false,
+            layout: "half",
+          },
+        ],
+        from: [
+          {
+            id: "from-name",
+            label: "Business Name",
+            type: "text",
+            placeholder: "Your Business Name",
+            default: true,
+            locked: true,
+            layout: "full",
+          },
+          {
+            id: "from-email",
+            label: "Email",
+            type: "text",
+            placeholder: "you@example.com",
+            default: true,
+            locked: true,
+            layout: "half",
+          },
+          {
+            id: "from-phone",
+            label: "Phone",
+            type: "text",
+            placeholder: "+1 234 567 890",
+            default: true,
+            layout: "half",
+          },
+          {
+            id: "from-address",
+            label: "Address",
+            type: "textarea",
+            placeholder: "123 Main St, City, Country",
+            default: true,
+            locked: true,
+            layout: "full",
+          },
+          {
+            id: "from-website",
+            label: "Website",
+            type: "text",
+            placeholder: "https://example.com",
+            default: false,
+            layout: "half",
+          },
+          {
+            id: "from-tax-id",
+            label: "Tax ID / VAT",
+            type: "text",
+            placeholder: "XX123456789",
+            default: false,
+            layout: "half",
+          },
+        ],
+        to: [
+          {
+            id: "to-name",
+            label: "Client Name",
+            type: "text",
+            placeholder: "Client Name",
+            default: true,
+            locked: true,
+            layout: "full",
+          },
+          {
+            id: "to-email",
+            label: "Email",
+            type: "text",
+            placeholder: "client@example.com",
+            default: true,
+            locked: true,
+            layout: "half",
+          },
+          {
+            id: "to-phone",
+            label: "Phone",
+            type: "text",
+            placeholder: "+1 987 654 321",
+            default: true,
+            layout: "half",
+          },
+          {
+            id: "to-address",
+            label: "Address",
+            type: "textarea",
+            placeholder: "456 Client Ave, City, Country",
+            default: true,
+            locked: true,
+            layout: "full",
+          },
+          {
+            id: "to-company",
+            label: "Company",
+            type: "text",
+            placeholder: "Client Company Inc.",
+            default: false,
+            layout: "half",
+          },
+          {
+            id: "to-tax-id",
+            label: "Client Tax ID",
+            type: "text",
+            placeholder: "XX987654321",
+            default: false,
+            layout: "half",
+          },
+        ],
+        notes: [
+          {
+            id: "inv-notes",
+            label: "Notes",
+            type: "textarea",
+            placeholder: "Payment terms, bank details, thank you...",
+            default: true,
+            locked: true,
+            layout: "full",
+          },
+          {
+            id: "inv-terms",
+            label: "Terms & Conditions",
+            type: "textarea",
+            placeholder: "Late payment fee: 1.5% per month...",
+            default: false,
+            layout: "full",
+          },
+        ],
+      };
+
+      let activeFields = {};
+      Object.keys(SECTION_DEFS).forEach((sec) => {
+        activeFields[sec] = SECTION_DEFS[sec]
+          .filter((f) => f.default)
+          .map((f) => f.id);
+      });
+
+      // ========== LINE ITEM COLUMNS ==========
+      let ALL_COLS = [
+        {
+          id: "description",
+          label: "Description",
+          type: "text",
+          default: true,
+          locked: true,
+        },
+        {
+          id: "quantity",
+          label: "Qty",
+          type: "number",
+          default: true,
+          locked: true,
+        },
+        {
+          id: "rate",
+          label: "Rate",
+          type: "number",
+          default: true,
+          locked: true,
+        },
+        {
+          id: "amount",
+          label: "Amount",
+          type: "computed",
+          default: true,
+          locked: true,
+        },
+        { id: "unit", label: "Unit", type: "text", default: false },
+        { id: "discount", label: "Disc %", type: "number", default: false },
+        { id: "tax", label: "Tax %", type: "number", default: false },
+        { id: "sku", label: "SKU", type: "text", default: false },
+        { id: "hsn", label: "HSN/SAC", type: "text", default: false },
+        { id: "notes", label: "Notes", type: "text", default: false },
+      ];
+      let activeCols = ALL_COLS.filter((c) => c.default).map((c) => c.id);
+
+      // ========== TEMPLATE ==========
+      function setTemplate(t) {
+        currentTemplate = t;
+        document
+          .querySelectorAll(".tpl-opt")
+          .forEach((el) => el.classList.toggle("active", el.dataset.tpl === t));
+        render();
+      }
+
+      // ========== CONFIG TOGGLE ==========
+      function toggleCfg(sec) {
+        const el = document.getElementById("cfg-" + sec);
+        el.classList.toggle("open");
+      }
+
+      // ========== RENDER FIELD CONFIG CHIPS ==========
+      function renderCfgChips(sec) {
+        const defs = SECTION_DEFS[sec];
+        const container = document.getElementById("cfg-chips-" + sec);
+        container.innerHTML = defs
+          .map((f) => {
+            const active = activeFields[sec].includes(f.id);
+            const locked = f.locked;
+            return `<span class="cfg-chip ${active ? "active" : ""} ${locked ? "locked" : ""}" onclick="${locked ? "" : `toggleField('${sec}','${f.id}')`}">${active ? '<i class="fas fa-check"></i>' : '<i class="fas fa-plus"></i>'} ${f.label}</span>`;
+          })
+          .join("");
+      }
+
+      function toggleField(sec, fid) {
+        if (activeFields[sec].includes(fid)) {
+          activeFields[sec] = activeFields[sec].filter((f) => f !== fid);
+        } else {
+          activeFields[sec].push(fid);
+        }
+        // Remove value if deactivated
+        if (!activeFields[sec].includes(fid)) {
+          const el = document.getElementById(fid);
+          if (el) el.value = "";
+        }
+        renderCfgChips(sec);
+        renderFields(sec);
+        render();
+      }
+
+      // ========== ADD CUSTOM FIELD ==========
+      function addCustomField(sec) {
+        const nameInput = document.getElementById("custom-" + sec + "-name");
+        const typeSelect = document.getElementById("custom-" + sec + "-type");
+        const name = nameInput.value.trim();
+        if (!name) return;
+        const id = "custom-" + sec + "-" + Date.now();
+        const type = typeSelect ? typeSelect.value : "text";
+        SECTION_DEFS[sec].push({
+          id: id,
+          label: name,
+          type: type,
+          placeholder: name,
+          default: false,
+          layout: type === "textarea" ? "full" : "half",
+          isCustom: true,
+        });
+        activeFields[sec].push(id);
+        nameInput.value = "";
+        renderCfgChips(sec);
+        renderFields(sec);
+        render();
+      }
+
+      // ========== RENDER SECTION FIELDS ==========
+      function renderFields(sec) {
+        const defs = SECTION_DEFS[sec];
+        const container = document.getElementById("fields-" + sec);
+        let html = "";
+        let inRow = false;
+        let rowCount = 0;
+        const active = activeFields[sec];
+        const visibleDefs = defs.filter((f) => active.includes(f.id));
+
+        visibleDefs.forEach((f, i) => {
+          const next = visibleDefs[i + 1];
+          if (f.layout === "half") {
+            if (!inRow) {
+              html += '<div class="row">';
+              inRow = true;
+              rowCount = 0;
+            }
+            html += renderFieldInput(f);
+            rowCount++;
+            if (rowCount >= 2 || !next || next.layout !== "half") {
+              html += "</div>";
+              inRow = false;
+            }
+          } else {
+            if (inRow) {
+              html += "</div>";
+              inRow = false;
+            }
+            html += renderFieldInput(f);
+          }
+        });
+        if (inRow) html += "</div>";
+        container.innerHTML = html;
+      }
+
+      function renderFieldInput(f) {
+        if (f.type === "select") {
+          const opts = f.options
+            .map((o) => `<option value="${o.v}">${o.l}</option>`)
+            .join("");
+          return `<div class="fg"><label>${f.label}</label><select id="${f.id}" onchange="render()">${opts}</select></div>`;
+        } else if (f.type === "textarea") {
+          return `<div class="fg"><label>${f.label}</label><textarea id="${f.id}" placeholder="${f.placeholder || ""}" oninput="render()"></textarea></div>`;
+        } else {
+          const t =
+            f.type === "date"
+              ? "date"
+              : f.type === "number"
+                ? "number"
+                : "text";
+          return `<div class="fg"><label>${f.label}</label><input type="${t}" id="${f.id}" placeholder="${f.placeholder || ""}" oninput="render()"></div>`;
+        }
+      }
+
+      // ========== COLUMN CHIPS ==========
+      function renderColChips() {
+        document.getElementById("col-chips").innerHTML = ALL_COLS.map((c) => {
+          const active = activeCols.includes(c.id);
+          const deletable = c.isCustom && !c.locked;
+          return `<span class="cfg-chip ${active ? "active" : ""} ${c.locked ? "locked" : ""}" onclick="${c.locked ? "" : `toggleCol('${c.id}')`}">${active ? '<i class="fas fa-check"></i>' : '<i class="fas fa-plus"></i>'} ${c.label}${deletable ? ` <i class="fas fa-times" onclick="event.stopPropagation();removeCustomCol('${c.id}')" style="margin-left:2px;opacity:.6"></i>` : ""}</span>`;
+        }).join("");
+      }
+      function toggleCol(cid) {
+        if (activeCols.includes(cid))
+          activeCols = activeCols.filter((c) => c !== cid);
+        else activeCols.push(cid);
+        renderColChips();
+        renderTableHeader();
+        render();
+      }
+      function addCustomCol() {
+        const nameInput = document.getElementById("custom-col-name");
+        const typeSelect = document.getElementById("custom-col-type");
+        const name = nameInput.value.trim();
+        if (!name) return;
+        const id = "custom-col-" + Date.now();
+        const type = typeSelect.value;
+        ALL_COLS.push({
+          id: id,
+          label: name,
+          type: type,
+          default: false,
+          isCustom: true,
+        });
+        activeCols.push(id);
+        nameInput.value = "";
+        renderColChips();
+        renderTableHeader();
+        render();
+      }
+      function removeCustomCol(cid) {
+        ALL_COLS = ALL_COLS.filter((c) => c.id !== cid);
+        activeCols = activeCols.filter((c) => c !== cid);
+        renderColChips();
+        renderTableHeader();
+        render();
+      }
+
+      // ========== TABLE ==========
+      function renderTableHeader() {
+        let h = "<tr>";
+        activeCols.forEach((cid) => {
+          const c = ALL_COLS.find((x) => x.id === cid);
+          const r = ["quantity", "rate", "amount", "discount", "tax"].includes(
+            cid,
+          );
+          h += `<th class="${r ? "r" : ""}">${c.label}</th>`;
+        });
+        h += '<th style="width:32px"></th></tr>';
+        document.getElementById("items-thead").innerHTML = h;
+      }
+      function addRow() {
+        const tr = document.createElement("tr");
+        tr.innerHTML = buildRowHTML();
+        document.getElementById("items-tbody").appendChild(tr);
+        tr.querySelector("input")?.focus();
+        render();
+      }
+      function removeRow(btn) {
+        const tb = document.getElementById("items-tbody");
+        if (tb.rows.length > 1) {
+          btn.closest("tr").remove();
+          render();
+        }
+      }
+      function buildRowHTML() {
+        let h = "";
+        activeCols.forEach((cid) => {
+          const c = ALL_COLS.find((x) => x.id === cid);
+          if (c.type === "computed") {
+            h += `<td class="amt r" data-col="${cid}">$0.00</td>`;
+          } else {
+            const t = c.type === "number" ? "number" : "text";
+            const s =
+              cid === "rate" || cid === "discount" || cid === "tax"
+                ? 'step="0.01"'
+                : "";
+            const m = c.type === "number" ? 'min="0"' : "";
+            const v =
+              cid === "quantity"
+                ? 'value="1"'
+                : cid === "rate"
+                  ? 'value="0"'
+                  : "";
+            h += `<td><input type="${t}" ${m} ${s} ${v} data-col="${cid}" placeholder="${c.label}" oninput="render()"></td>`;
+          }
+        });
+        h += `<td><button class="del-r" onclick="removeRow(this)"><i class="fas fa-trash-alt"></i></button></td>`;
+        return h;
+      }
+
+      // ========== HELPERS ==========
+      function cur() {
+        const el = document.getElementById("inv-currency");
+        return el ? el.value : "$";
+      }
+      function fmt(n) {
+        return cur() + parseFloat(n || 0).toFixed(2);
+      }
+      function fmtDate(d) {
+        if (!d) return "";
+        return new Date(d + "T00:00:00").toLocaleDateString("en-US", {
+          year: "numeric",
+          month: "long",
+          day: "numeric",
+        });
+      }
+      function v(id) {
+        const el = document.getElementById(id);
+        return el ? el.value : "";
+      }
+      function nl2br(s) {
+        return (s || "").replace(/\n/g, "<br>");
+      }
+
+      // ========== MAIN RENDER ==========
+      function render() {
+        const rows = document.querySelectorAll("#items-tbody tr");
+        let subtotal = 0;
+        const items = [];
+        rows.forEach((row) => {
+          const data = {};
+          activeCols.forEach((cid) => {
+            const c = ALL_COLS.find((x) => x.id === cid);
+            if (c.type === "computed") return;
+            const inp = row.querySelector(`input[data-col="${cid}"]`);
+            data[cid] =
+              c.type === "number"
+                ? parseFloat(inp?.value) || 0
+                : inp?.value || "";
+          });
+          let la = (data.quantity || 0) * (data.rate || 0);
+          if (data.discount) la -= la * (data.discount / 100);
+          if (data.tax) la += la * (data.tax / 100);
+          data.amount = la;
+          subtotal += la;
+          const ac = row.querySelector(`td[data-col="amount"]`);
+          if (ac) ac.textContent = fmt(la);
+          items.push(data);
+        });
+
+        const taxR = parseFloat(v("tax-rate")) || 0;
+        const discR = parseFloat(v("discount-rate")) || 0;
+        const discA = subtotal * (discR / 100);
+        const afterD = subtotal - discA;
+        const taxA = afterD * (taxR / 100);
+        const total = afterD + taxA;
+
+        document.getElementById("subtotal").textContent = fmt(subtotal);
+        document.getElementById("discount-amount").textContent =
+          "-" + fmt(discA);
+        document.getElementById("tax-amount").textContent = fmt(taxA);
+        document.getElementById("grand-total").textContent = fmt(total);
+
+        // Table rows
+        let trs = "";
+        items.forEach((item) => {
+          trs += "<tr>";
+          activeCols.forEach((cid) => {
+            const c = ALL_COLS.find((x) => x.id === cid);
+            const r = [
+              "quantity",
+              "rate",
+              "amount",
+              "discount",
+              "tax",
+            ].includes(cid);
+            let val = item[cid];
+            if (cid === "amount") val = fmt(val);
+            else if (cid === "rate") val = fmt(val);
+            else if (cid === "discount" && val) val = val + "%";
+            else if (cid === "tax" && val) val = val + "%";
+            trs += `<td class="${r ? "r" : ""}">${val || "-"}</td>`;
+          });
+          trs += "</tr>";
+        });
+        let ths = "";
+        activeCols.forEach((cid) => {
+          const c = ALL_COLS.find((x) => x.id === cid);
+          const r = ["quantity", "rate", "amount", "discount", "tax"].includes(
+            cid,
+          );
+          ths += `<th class="${r ? "r" : ""}">${c.label}</th>`;
+        });
+
+        // Totals
+        let tots = `<div class="inv-tot-r"><span class="inv-tot-l">Subtotal</span><span class="inv-tot-v">${fmt(subtotal)}</span></div>`;
+        if (discR > 0)
+          tots += `<div class="inv-tot-r"><span class="inv-tot-l">Discount (${discR}%)</span><span class="inv-tot-v">-${fmt(discA)}</span></div>`;
+        if (taxR > 0)
+          tots += `<div class="inv-tot-r"><span class="inv-tot-l">Tax (${taxR}%)</span><span class="inv-tot-v">${fmt(taxA)}</span></div>`;
+        tots += `<div class="inv-tot-r grand"><span class="inv-tot-l">Total</span><span class="inv-tot-v">${fmt(total)}</span></div>`;
+
+        // Notes
+        let notesHTML = "";
+        const notes = v("inv-notes");
+        const terms = v("inv-terms");
+        if (notes)
+          notesHTML += `<div class="inv-notes"><h4>Notes</h4><p>${nl2br(notes)}</p></div>`;
+        if (terms)
+          notesHTML += `<div class="inv-notes"><h4>Terms & Conditions</h4><p>${nl2br(terms)}</p></div>`;
+
+        // Custom field extras for parties
+        function getCustomExtras(sec) {
+          return SECTION_DEFS[sec]
+            .filter((f) => f.isCustom && activeFields[sec].includes(f.id))
+            .map((f) => {
+              const val = v(f.id);
+              return val ? `${val}<br>` : "";
+            })
+            .join("");
+        }
+
+        const preview = document.getElementById("invoice-preview");
+        preview.className = "tpl-" + currentTemplate;
+        preview.innerHTML = `
+        <div class="inv-hdr">
+            <div class="inv-brand"><h1>${v("from-name") || "Your Business"}</h1><p>${v("from-email") || ""}</p></div>
+            <div class="inv-meta"><div class="inv-num">${v("inv-number") || "INV-0000"}</div><p>Date: ${fmtDate(v("inv-date"))}</p><p>Due: ${fmtDate(v("inv-due"))}</p>${v("inv-po") ? `<p>PO: ${v("inv-po")}</p>` : ""}${v("inv-ref") ? `<p>Ref: ${v("inv-ref")}</p>` : ""}</div>
+        </div>
+        <div class="inv-parties">
+            <div class="inv-party"><h3>From</h3><div class="nm">${v("from-name") || "Your Business"}</div><div class="dt">${v("from-email") ? v("from-email") + "<br>" : ""}${v("from-phone") ? v("from-phone") + "<br>" : ""}${v("from-website") ? v("from-website") + "<br>" : ""}${v("from-tax-id") ? "Tax ID: " + v("from-tax-id") + "<br>" : ""}${nl2br(v("from-address"))}${getCustomExtras("from")}</div></div>
+            <div class="inv-party"><h3>Bill To</h3><div class="nm">${v("to-name") || "Client Name"}</div><div class="dt">${v("to-company") ? v("to-company") + "<br>" : ""}${v("to-email") ? v("to-email") + "<br>" : ""}${v("to-phone") ? v("to-phone") + "<br>" : ""}${v("to-tax-id") ? "Tax ID: " + v("to-tax-id") + "<br>" : ""}${nl2br(v("to-address"))}${getCustomExtras("to")}</div></div>
+        </div>
+        <table class="inv-tbl"><thead><tr>${ths}</tr></thead><tbody>${trs}</tbody></table>
+        <div class="inv-totals"><div class="inv-tot-box">${tots}</div></div>
+        ${notesHTML}
+        <div class="inv-footer">Thank you for your business!</div>
+    `;
+      }
+
+      // ========== INIT ==========
+      document.addEventListener("DOMContentLoaded", () => {
+        const today = new Date();
+        const due = new Date(today);
+        due.setDate(due.getDate() + 30);
+        // Set default dates
+        setTimeout(() => {
+          const dateEl = document.getElementById("inv-date");
+          if (dateEl) dateEl.value = today.toISOString().split("T")[0];
+          const dueEl = document.getElementById("inv-due");
+          if (dueEl) dueEl.value = due.toISOString().split("T")[0];
+          const numEl = document.getElementById("inv-number");
+          if (numEl)
+            numEl.value =
+              "INV-" + String(Math.floor(Math.random() * 9000) + 1000);
+        }, 50);
+
+        // Render all sections
+        Object.keys(SECTION_DEFS).forEach((sec) => {
+          renderCfgChips(sec);
+          renderFields(sec);
+        });
+        renderColChips();
+        renderTableHeader();
+        addRow();
+
+        setTimeout(() => render(), 100);
+      });
+
+      // ========== ACTIONS ==========
+      function downloadPDF() {
+        html2pdf()
+          .set({
+            margin: [10, 10, 10, 10],
+            filename: (v("inv-number") || "invoice") + ".pdf",
+            image: { type: "jpeg", quality: 0.98 },
+            html2canvas: { scale: 2, useCORS: true },
+            jsPDF: { unit: "mm", format: "a4", orientation: "portrait" },
+          })
+          .from(document.getElementById("invoice-preview"))
+          .save();
+      }
+      function printInvoice() {
+        window.print();
+      }
+      function resetForm() {
+        if (confirm("Reset all fields?")) location.reload();
+      }
+      document.addEventListener("keydown", (e) => {
+        if (e.ctrlKey && e.key === "p") {
+          e.preventDefault();
+          printInvoice();
+        }
+        if (e.ctrlKey && e.key === "s") {
+          e.preventDefault();
+          downloadPDF();
+        }
+      });
+    </script>
+  </body>
+</html>
