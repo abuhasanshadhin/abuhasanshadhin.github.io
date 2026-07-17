@@ -1,0 +1,1199 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Abu Hasan Shadhin — PHP Laravel Developer</title>
+    <meta
+      name="description"
+      content="Portfolio of Abu Hasan Shadhin, a PHP Laravel Developer with 5+ years of experience building scalable web applications."
+    />
+    <meta
+      name="keywords"
+      content="PHP, Laravel, Developer, Portfolio, Abu Hasan Shadhin, Backend Developer, Dhaka, Bangladesh"
+    />
+    <link
+      rel="icon"
+      href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>👨‍💻</text></svg>"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+    />
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+  <body>
+    <!-- Cursor Glow Effect -->
+    <div class="cursor-glow" id="cursorGlow"></div>
+
+    <!-- Preloader -->
+    <div class="preloader" id="preloader">
+      <div class="preloader-inner">
+        <div class="preloader-code">&lt;/&gt;</div>
+        <div class="preloader-text">Loading...</div>
+      </div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar">
+      <div class="nav-container">
+        <a href="#hero" class="nav-logo">
+          <span class="logo-bracket">&lt;</span>SHADHIN<span
+            class="logo-bracket"
+          >
+            /&gt;</span
+          >
+        </a>
+        <div class="nav-links" id="navLinks">
+          <a href="#hero" class="nav-link active" data-section="hero">Home</a>
+          <a href="#about" class="nav-link" data-section="about">About</a>
+          <a href="#skills" class="nav-link" data-section="skills">Skills</a>
+          <a href="#experience" class="nav-link" data-section="experience"
+            >Experience</a
+          >
+          <a href="#projects" class="nav-link" data-section="projects"
+            >Projects</a
+          >
+          <a href="#education" class="nav-link" data-section="education"
+            >Education</a
+          >
+          <a href="#contact" class="nav-link" data-section="contact">Contact</a>
+        </div>
+        <button
+          class="nav-toggle"
+          id="navToggle"
+          aria-label="Toggle navigation"
+        >
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero" id="hero">
+      <div class="hero-particles" id="heroParticles"></div>
+      <div class="hero-dots"></div>
+      <div class="hero-content">
+        <div class="hero-greeting"><span class="wave">👋</span> Hello, I'm</div>
+        <h1 class="hero-name">
+          <span class="name-line">Abu Hasan</span>
+          <span class="name-line name-accent">Shadhin</span>
+        </h1>
+        <div class="hero-title">
+          <span class="typed-prefix">I'm a </span>
+          <span class="typed-text" id="typedText"></span>
+          <span class="typed-cursor">|</span>
+        </div>
+        <p class="hero-description">
+          Building scalable, high-performance web applications with 5+ years of
+          experience in PHP, Laravel, and modern backend technologies.
+        </p>
+        <div class="hero-actions">
+          <a href="#projects" class="btn btn-primary">
+            <i class="fas fa-rocket"></i> View My Work
+          </a>
+          <a href="#contact" class="btn btn-outline">
+            <i class="fas fa-envelope"></i> Get In Touch
+          </a>
+        </div>
+        <div class="hero-social">
+          <a
+            href="https://github.com/abuhasanshadhin"
+            target="_blank"
+            rel="noopener"
+            class="social-link"
+            aria-label="GitHub"
+          >
+            <i class="fab fa-github"></i>
+          </a>
+          <a
+            href="https://www.linkedin.com/in/abu-hasan-shadhin-098288185/"
+            target="_blank"
+            rel="noopener"
+            class="social-link"
+            aria-label="LinkedIn"
+          >
+            <i class="fab fa-linkedin-in"></i>
+          </a>
+          <a
+            href="mailto:abuhasanshadhin@gmail.com"
+            class="social-link"
+            aria-label="Email"
+          >
+            <i class="fas fa-envelope"></i>
+          </a>
+        </div>
+      </div>
+      <a href="#about" class="scroll-indicator" aria-label="Scroll down">
+        <div class="mouse">
+          <div class="mouse-wheel"></div>
+        </div>
+        <span>Scroll Down</span>
+      </a>
+    </section>
+
+    <!-- About Section -->
+    <section class="section about" id="about">
+      <div class="section-divider"></div>
+      <div class="container">
+        <div class="section-header">
+          <span class="section-tag">&lt;about&gt;</span>
+          <h2 class="section-title">
+            About <span class="text-accent">Me</span>
+          </h2>
+          <div class="section-line"></div>
+        </div>
+        <div class="about-grid">
+          <div class="about-image-wrapper">
+            <div class="about-image">
+              <div class="about-image-placeholder">
+                <i class="fas fa-user-tie"></i>
+              </div>
+              <div class="about-image-border"></div>
+            </div>
+            <div class="about-stats">
+              <div class="stat-item" data-count="5">
+                <span class="stat-number">5+</span>
+                <span class="stat-label">Years Experience</span>
+              </div>
+              <div class="stat-item" data-count="10">
+                <span class="stat-number">10+</span>
+                <span class="stat-label">Projects Delivered</span>
+              </div>
+              <div class="stat-item" data-count="6">
+                <span class="stat-number">6+</span>
+                <span class="stat-label">Happy Clients</span>
+              </div>
+            </div>
+          </div>
+          <div class="about-content">
+            <h3 class="about-subtitle">PHP Laravel Developer</h3>
+            <p class="about-text">
+              I'm a passionate backend developer with
+              <strong>5+ years of experience</strong> specializing in the
+              Laravel framework. I have a solid understanding of job queues,
+              caching mechanisms, and building large-scale enterprise
+              applications.
+            </p>
+            <p class="about-text">
+              I've delivered solutions for high-profile clients including
+              <strong>a2i (ICT Division, Government of Bangladesh)</strong>,
+              <strong>Bangladesh Navy</strong>, and international clients in the
+              <strong>US and UK</strong>. My expertise spans RESTful API
+              development, database design, and secure role-based access control
+              systems.
+            </p>
+            <p class="about-text">
+              Currently working as a
+              <strong>Software Engineer at Riseup Labs</strong>, where I build
+              and maintain scalable backend systems using Laravel, Vue.js,
+              Node.js, and MySQL.
+            </p>
+            <div class="about-details">
+              <div class="detail-item">
+                <i class="fas fa-map-marker-alt"></i>
+                <span>Dhaka, Bangladesh</span>
+              </div>
+              <div class="detail-item">
+                <i class="fas fa-building"></i>
+                <span>Riseup Labs</span>
+              </div>
+              <div class="detail-item">
+                <i class="fas fa-envelope"></i>
+                <span>abuhasanshadhin@gmail.com</span>
+              </div>
+              <div class="detail-item">
+                <i class="fas fa-phone"></i>
+                <span>+880 1794-867982</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <span class="section-close">&lt;/about&gt;</span>
+    </section>
+
+    <!-- Skills Section -->
+    <section class="section skills" id="skills">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-tag">&lt;skills&gt;</span>
+          <h2 class="section-title">
+            Technical <span class="text-accent">Skills</span>
+          </h2>
+          <div class="section-line"></div>
+        </div>
+        <div class="skills-grid">
+          <div class="skill-category" data-aos="fade-up">
+            <div class="skill-category-header">
+              <i class="fab fa-php"></i>
+              <h3>Backend</h3>
+            </div>
+            <div class="skill-items">
+              <div class="skill-item">
+                <div class="skill-info">
+                  <span class="skill-name">PHP</span>
+                  <span class="skill-percent">72%</span>
+                </div>
+                <div class="skill-bar">
+                  <div class="skill-progress" data-width="72"></div>
+                </div>
+              </div>
+              <div class="skill-item">
+                <div class="skill-info">
+                  <span class="skill-name">Laravel</span>
+                  <span class="skill-percent">75%</span>
+                </div>
+                <div class="skill-bar">
+                  <div class="skill-progress" data-width="75"></div>
+                </div>
+              </div>
+              <div class="skill-item">
+                <div class="skill-info">
+                  <span class="skill-name">Node.js</span>
+                  <span class="skill-percent">55%</span>
+                </div>
+                <div class="skill-bar">
+                  <div class="skill-progress" data-width="55"></div>
+                </div>
+              </div>
+              <div class="skill-item">
+                <div class="skill-info">
+                  <span class="skill-name">Express.js</span>
+                  <span class="skill-percent">50%</span>
+                </div>
+                <div class="skill-bar">
+                  <div class="skill-progress" data-width="50"></div>
+                </div>
+              </div>
+              <div class="skill-item">
+                <div class="skill-info">
+                  <span class="skill-name">RESTful API</span>
+                  <span class="skill-percent">70%</span>
+                </div>
+                <div class="skill-bar">
+                  <div class="skill-progress" data-width="70"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="skill-category" data-aos="fade-up" data-aos-delay="100">
+            <div class="skill-category-header">
+              <i class="fab fa-js-square"></i>
+              <h3>Frontend</h3>
+            </div>
+            <div class="skill-items">
+              <div class="skill-item">
+                <div class="skill-info">
+                  <span class="skill-name">JavaScript</span>
+                  <span class="skill-percent">62%</span>
+                </div>
+                <div class="skill-bar">
+                  <div class="skill-progress" data-width="62"></div>
+                </div>
+              </div>
+              <div class="skill-item">
+                <div class="skill-info">
+                  <span class="skill-name">Vue.js</span>
+                  <span class="skill-percent">58%</span>
+                </div>
+                <div class="skill-bar">
+                  <div class="skill-progress" data-width="58"></div>
+                </div>
+              </div>
+              <div class="skill-item">
+                <div class="skill-info">
+                  <span class="skill-name">HTML5</span>
+                  <span class="skill-percent">65%</span>
+                </div>
+                <div class="skill-bar">
+                  <div class="skill-progress" data-width="65"></div>
+                </div>
+              </div>
+              <div class="skill-item">
+                <div class="skill-info">
+                  <span class="skill-name">CSS3</span>
+                  <span class="skill-percent">60%</span>
+                </div>
+                <div class="skill-bar">
+                  <div class="skill-progress" data-width="60"></div>
+                </div>
+              </div>
+              <div class="skill-item">
+                <div class="skill-info">
+                  <span class="skill-name">jQuery</span>
+                  <span class="skill-percent">60%</span>
+                </div>
+                <div class="skill-bar">
+                  <div class="skill-progress" data-width="60"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="skill-category" data-aos="fade-up" data-aos-delay="200">
+            <div class="skill-category-header">
+              <i class="fas fa-database"></i>
+              <h3>Database & Tools</h3>
+            </div>
+            <div class="skill-items">
+              <div class="skill-item">
+                <div class="skill-info">
+                  <span class="skill-name">MySQL</span>
+                  <span class="skill-percent">72%</span>
+                </div>
+                <div class="skill-bar">
+                  <div class="skill-progress" data-width="72"></div>
+                </div>
+              </div>
+              <div class="skill-item">
+                <div class="skill-info">
+                  <span class="skill-name">PostgreSQL</span>
+                  <span class="skill-percent">50%</span>
+                </div>
+                <div class="skill-bar">
+                  <div class="skill-progress" data-width="50"></div>
+                </div>
+              </div>
+              <div class="skill-item">
+                <div class="skill-info">
+                  <span class="skill-name">Redis</span>
+                  <span class="skill-percent">55%</span>
+                </div>
+                <div class="skill-bar">
+                  <div class="skill-progress" data-width="55"></div>
+                </div>
+              </div>
+              <div class="skill-item">
+                <div class="skill-info">
+                  <span class="skill-name">Git</span>
+                  <span class="skill-percent">65%</span>
+                </div>
+                <div class="skill-bar">
+                  <div class="skill-progress" data-width="65"></div>
+                </div>
+              </div>
+              <div class="skill-item">
+                <div class="skill-info">
+                  <span class="skill-name">Apache Solr</span>
+                  <span class="skill-percent">45%</span>
+                </div>
+                <div class="skill-bar">
+                  <div class="skill-progress" data-width="45"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="skill-category" data-aos="fade-up" data-aos-delay="300">
+            <div class="skill-category-header">
+              <i class="fas fa-cogs"></i>
+              <h3>Laravel Expertise</h3>
+            </div>
+            <div class="skill-tags">
+              <span class="skill-tag">Job Queues</span>
+              <span class="skill-tag">Caching</span>
+              <span class="skill-tag">Authentication</span>
+              <span class="skill-tag">JWT</span>
+              <span class="skill-tag">Eloquent ORM</span>
+              <span class="skill-tag">Blade Templates</span>
+              <span class="skill-tag">Middleware</span>
+              <span class="skill-tag">Migrations</span>
+              <span class="skill-tag">Seeding</span>
+              <span class="skill-tag">Observers</span>
+              <span class="skill-tag">Events</span>
+              <span class="skill-tag">Notifications</span>
+              <span class="skill-tag">RBAC</span>
+              <span class="skill-tag">API Resources</span>
+              <span class="skill-tag">Form Requests</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <span class="section-close">&lt;/skills&gt;</span>
+    </section>
+
+    <!-- Experience Section -->
+    <section class="section experience" id="experience">
+      <div class="section-divider"></div>
+      <div class="container">
+        <div class="section-header">
+          <span class="section-tag">&lt;experience&gt;</span>
+          <h2 class="section-title">
+            Work <span class="text-accent">Experience</span>
+          </h2>
+          <div class="section-line"></div>
+        </div>
+        <div class="timeline">
+          <div class="timeline-item" data-aos="fade-right">
+            <div class="timeline-dot">
+              <i class="fas fa-briefcase"></i>
+            </div>
+            <div class="timeline-content">
+              <div class="timeline-header">
+                <h3 class="timeline-title">Software Engineer</h3>
+                <span class="timeline-badge current">Current</span>
+              </div>
+              <h4 class="timeline-company">
+                <i class="fas fa-building"></i> Riseup Labs
+              </h4>
+              <span class="timeline-date">
+                <i class="far fa-calendar-alt"></i> Sep 2022 – Present
+              </span>
+              <span class="timeline-location">
+                <i class="fas fa-map-marker-alt"></i> Uttara, Dhaka
+              </span>
+              <ul class="timeline-list">
+                <li>
+                  Delivered large-scale backend systems for government and
+                  international clients including a2i (ICT Division, Government
+                  of Bangladesh), Bangladesh Navy, US-based and UK-based clients
+                </li>
+                <li>
+                  Built and maintained RESTful APIs using Laravel and Node.js
+                  with JWT-based authentication
+                </li>
+                <li>
+                  Optimized application performance using Redis caching, Apache
+                  Solr search engine integration, and N+1 query resolution
+                </li>
+                <li>
+                  Collaborated with cross-functional teams to deliver secure,
+                  scalable LMS and marketplace solutions
+                </li>
+              </ul>
+              <div class="timeline-tech">
+                <span>Laravel</span><span>Vue.js</span><span>Node.js</span
+                ><span>MySQL</span><span>Redis</span><span>Solr</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="timeline-item" data-aos="fade-left">
+            <div class="timeline-dot">
+              <i class="fas fa-briefcase"></i>
+            </div>
+            <div class="timeline-content">
+              <div class="timeline-header">
+                <h3 class="timeline-title">Programmer</h3>
+              </div>
+              <h4 class="timeline-company">
+                <i class="fas fa-building"></i> Nogor Solutions Ltd.
+              </h4>
+              <span class="timeline-date">
+                <i class="far fa-calendar-alt"></i> Jun 2021 – Aug 2022
+              </span>
+              <span class="timeline-location">
+                <i class="fas fa-map-marker-alt"></i> Niketan, Dhaka
+              </span>
+              <ul class="timeline-list">
+                <li>
+                  Developed backend modules for Bangladesh Navy projects using
+                  Laravel, Vue.js, and MySQL
+                </li>
+                <li>
+                  Built a University Management System for NPI University
+                  covering student enrollment, course management, and
+                  administrative workflows
+                </li>
+                <li>
+                  Designed and optimized RESTful APIs and database schemas for
+                  government and institutional clients
+                </li>
+              </ul>
+              <div class="timeline-tech">
+                <span>Laravel</span><span>Vue.js</span><span>MySQL</span
+                ><span>REST API</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <span class="section-close">&lt;/experience&gt;</span>
+    </section>
+
+    <!-- Projects Section -->
+    <section class="section projects" id="projects">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-tag">&lt;projects&gt;</span>
+          <h2 class="section-title">
+            Featured <span class="text-accent">Projects</span>
+          </h2>
+          <div class="section-line"></div>
+        </div>
+
+        <div class="project-filters">
+          <button class="filter-btn active" data-filter="all">All</button>
+          <button class="filter-btn" data-filter="laravel">Laravel</button>
+          <button class="filter-btn" data-filter="nodejs">Node.js</button>
+          <button class="filter-btn" data-filter="vuejs">Vue.js</button>
+          <button class="filter-btn" data-filter="freelance">Freelance</button>
+        </div>
+
+        <div class="projects-grid">
+          <!-- Featured Freelance Project -->
+          <div
+            class="project-card project-card--featured"
+            data-category="laravel freelance"
+            data-aos="fade-up"
+          >
+            <div class="project-card-header">
+              <div class="project-icon">
+                <i class="fas fa-utensils"></i>
+              </div>
+              <div class="project-links">
+                <span class="project-badge project-badge--featured"
+                  >Featured</span
+                >
+              </div>
+            </div>
+            <h3 class="project-title">Avopla</h3>
+            <p class="project-subtitle">
+              Restaurant Discovery & Reservation Platform
+            </p>
+            <p class="project-description">
+              Built the backend API and admin panel for a Canadian restaurant
+              discovery platform. Developed RESTful APIs for restaurant search,
+              reservation management, and restaurant owner dashboards. Delivered
+              as a freelance project through Upwork.
+            </p>
+            <a
+              href="https://avopla.com"
+              target="_blank"
+              rel="noopener"
+              class="project-link"
+            >
+              <i class="fas fa-external-link-alt"></i> avopla.com
+            </a>
+            <div class="project-client">
+              <i class="fas fa-map-marker-alt"></i> Canada (Upwork Freelance)
+            </div>
+            <div class="project-tech">
+              <span>Laravel</span><span>REST API</span><span>Admin Panel</span
+              ><span>MySQL</span>
+            </div>
+          </div>
+
+          <!-- Featured Freelance Project: RoketBus -->
+          <div
+            class="project-card project-card--featured"
+            data-category="vuejs freelance"
+            data-aos="fade-up"
+            data-aos-delay="100"
+          >
+            <div class="project-card-header">
+              <div class="project-icon">
+                <i class="fas fa-bus"></i>
+              </div>
+              <div class="project-links">
+                <span class="project-badge project-badge--featured"
+                  >Featured</span
+                >
+              </div>
+            </div>
+            <h3 class="project-title">RoketBus</h3>
+            <p class="project-subtitle">
+              Bus Ticketing & Fleet Management Platform
+            </p>
+            <p class="project-description">
+              Built the company admin panel for India's leading digital bus
+              ticketing platform. Developed a Vue.js-based dashboard for fleet
+              management, route configuration, booking analytics, and operator
+              onboarding. Delivered as a freelance project through Upwork.
+            </p>
+            <a
+              href="https://roketbus.app"
+              target="_blank"
+              rel="noopener"
+              class="project-link"
+            >
+              <i class="fas fa-external-link-alt"></i> roketbus.app
+            </a>
+            <div class="project-client">
+              <i class="fas fa-map-marker-alt"></i> India (Upwork Freelance)
+            </div>
+            <div class="project-tech">
+              <span>Vue.js</span><span>Admin Panel</span
+              ><span>Fleet Management</span>
+            </div>
+          </div>
+
+          <div class="project-card" data-category="laravel" data-aos="fade-up">
+            <div class="project-card-header">
+              <div class="project-icon"><i class="fas fa-users"></i></div>
+              <div class="project-links">
+                <span class="project-badge">Laravel</span>
+              </div>
+            </div>
+            <h3 class="project-title">Kwando</h3>
+            <p class="project-subtitle">Social Networking Platform</p>
+            <p class="project-description">
+              Built the backend for an iOS social networking app featuring a
+              friendship system, user circles, and an event calendar. Developed
+              RESTful APIs for social interactions, group management, and event
+              scheduling with JWT authentication.
+            </p>
+            <div class="project-client">
+              <i class="fas fa-globe"></i> UK-based Client
+            </div>
+            <div class="project-tech">
+              <span>Laravel</span><span>MySQL</span><span>JWT</span
+              ><span>REST API</span>
+            </div>
+          </div>
+
+          <div
+            class="project-card"
+            data-category="nodejs"
+            data-aos="fade-up"
+            data-aos-delay="100"
+          >
+            <div class="project-card-header">
+              <div class="project-icon"><i class="fas fa-tshirt"></i></div>
+              <div class="project-links">
+                <span class="project-badge">Node.js</span>
+              </div>
+            </div>
+            <h3 class="project-title">Cloud Couture</h3>
+            <p class="project-subtitle">Garment Brand & Supplier Marketplace</p>
+            <p class="project-description">
+              Developed RESTful APIs for a garment brand and supplier
+              marketplace platform connecting brands and suppliers. Implemented
+              product listing, supplier onboarding, and buyer-seller interaction
+              endpoints.
+            </p>
+            <div class="project-client">
+              <i class="fas fa-globe"></i> US-based Client
+            </div>
+            <div class="project-tech">
+              <span>Node.js</span><span>Express.js</span><span>PostgreSQL</span>
+            </div>
+          </div>
+
+          <div
+            class="project-card"
+            data-category="laravel vuejs"
+            data-aos="fade-up"
+            data-aos-delay="200"
+          >
+            <div class="project-card-header">
+              <div class="project-icon">
+                <i class="fas fa-graduation-cap"></i>
+              </div>
+              <div class="project-links">
+                <span class="project-badge">LMS</span>
+              </div>
+            </div>
+            <h3 class="project-title">ITLMS</h3>
+            <p class="project-subtitle">NAEM, Bangladesh</p>
+            <p class="project-description">
+              Developed an Integrated Learning Management System for a
+              government training institute. Implemented course management,
+              enrollment, and role-based access control for institutional users.
+            </p>
+            <div class="project-client">
+              <i class="fas fa-landmark"></i> Government of Bangladesh
+            </div>
+            <div class="project-tech">
+              <span>Laravel</span><span>Vue.js</span><span>MySQL</span
+              ><span>RBAC</span>
+            </div>
+          </div>
+
+          <div
+            class="project-card"
+            data-category="laravel vuejs"
+            data-aos="fade-up"
+          >
+            <div class="project-card-header">
+              <div class="project-icon">
+                <i class="fas fa-chalkboard-teacher"></i>
+              </div>
+              <div class="project-links">
+                <span class="project-badge">Mobile API</span>
+              </div>
+            </div>
+            <h3 class="project-title">Teachers Guide</h3>
+            <p class="project-subtitle">Mobile App for Teachers</p>
+            <p class="project-description">
+              Developed RESTful APIs for a mobile application used by school
+              teachers across Bangladesh. Implemented features for accessing
+              teaching resources and curriculum guidance with JWT
+              authentication.
+            </p>
+            <div class="project-client">
+              <i class="fas fa-landmark"></i> a2i, ICT Division
+            </div>
+            <div class="project-tech">
+              <span>Laravel</span><span>Vue.js</span><span>MySQL</span
+              ><span>JWT</span>
+            </div>
+          </div>
+
+          <div
+            class="project-card"
+            data-category="laravel vuejs"
+            data-aos="fade-up"
+            data-aos-delay="100"
+          >
+            <div class="project-card-header">
+              <div class="project-icon"><i class="fas fa-blog"></i></div>
+              <div class="project-links">
+                <span class="project-badge">High Traffic</span>
+              </div>
+            </div>
+            <h3 class="project-title">Teachers Portal</h3>
+            <p class="project-subtitle">Content & Collaboration Platform</p>
+            <p class="project-description">
+              Built a web platform where teachers can publish blog posts and
+              educational content with social interaction features. Optimized
+              backend to handle 1,000+ concurrent requests using Redis caching
+              and Apache Solr.
+            </p>
+            <div class="project-client">
+              <i class="fas fa-landmark"></i> a2i, ICT Division
+            </div>
+            <div class="project-tech">
+              <span>Laravel</span><span>Vue.js</span><span>MySQL</span
+              ><span>Redis</span><span>Solr</span>
+            </div>
+          </div>
+
+          <div
+            class="project-card"
+            data-category="laravel vuejs"
+            data-aos="fade-up"
+            data-aos-delay="200"
+          >
+            <div class="project-card-header">
+              <div class="project-icon"><i class="fas fa-anchor"></i></div>
+              <div class="project-links">
+                <span class="project-badge">Military</span>
+              </div>
+            </div>
+            <h3 class="project-title">Navy Clothing MS</h3>
+            <p class="project-subtitle">Bangladesh Navy</p>
+            <p class="project-description">
+              Developed a centralized clothing management system for Bangladesh
+              Navy. Handled backend logic, data synchronization, and reporting
+              features for military inventory management.
+            </p>
+            <div class="project-client">
+              <i class="fas fa-landmark"></i> Bangladesh Navy
+            </div>
+            <div class="project-tech">
+              <span>Laravel</span><span>Vue.js</span><span>MySQL</span>
+            </div>
+          </div>
+
+          <div class="project-card" data-category="laravel" data-aos="fade-up">
+            <div class="project-card-header">
+              <div class="project-icon"><i class="fas fa-link"></i></div>
+              <div class="project-links">
+                <span class="project-badge">Laravel</span>
+              </div>
+            </div>
+            <h3 class="project-title">Choto.co</h3>
+            <p class="project-subtitle">
+              URL Shortener & Link Management Platform
+            </p>
+            <p class="project-description">
+              Contributed to the backend API for a URL shortening and link
+              management platform by Riseup Labs. Built RESTful APIs for link
+              creation, analytics tracking, QR code generation, and user
+              subscription management.
+            </p>
+            <a
+              href="https://choto.co"
+              target="_blank"
+              rel="noopener"
+              class="project-link"
+            >
+              <i class="fas fa-external-link-alt"></i> choto.co
+            </a>
+            <div class="project-client">
+              <i class="fas fa-building"></i> Riseup Labs
+            </div>
+            <div class="project-tech">
+              <span>Laravel</span><span>REST API</span><span>MySQL</span>
+            </div>
+          </div>
+
+          <div class="project-card" data-category="laravel" data-aos="fade-up">
+            <div class="project-card-header">
+              <div class="project-icon"><i class="fas fa-landmark"></i></div>
+              <div class="project-links">
+                <span class="project-badge">Govt</span>
+              </div>
+            </div>
+            <h3 class="project-title">ECS — Bangladesh Election Commission</h3>
+            <p class="project-subtitle">Official Election Commission Portal</p>
+            <p class="project-description">
+              Contributed to the backend API for the official website of the
+              Bangladesh Election Commission. Developed RESTful APIs for
+              location and constituency areas, and performed data migration —
+              importing data from CSV files and restructuring it to fit the new
+              database schema.
+            </p>
+            <a
+              href="https://ecs.gov.bd"
+              target="_blank"
+              rel="noopener"
+              class="project-link"
+            >
+              <i class="fas fa-external-link-alt"></i> ecs.gov.bd
+            </a>
+            <div class="project-client">
+              <i class="fas fa-landmark"></i> Government of Bangladesh
+            </div>
+            <div class="project-tech">
+              <span>Laravel</span><span>REST API</span
+              ><span>Data Migration</span><span>MySQL</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Open Source Section -->
+        <div class="opensource-section">
+          <h3 class="opensource-title">
+            <i class="fab fa-github"></i> Open Source Contributions
+          </h3>
+          <div class="opensource-grid">
+            <a
+              href="https://github.com/abuhasanshadhin/Tailwind-Admin-Template"
+              target="_blank"
+              rel="noopener"
+              class="opensource-card"
+            >
+              <div class="opensource-header">
+                <i class="fas fa-palette"></i>
+                <span class="opensource-lang">JS</span>
+              </div>
+              <h4>Tailwind Admin Template</h4>
+              <p>Admin dashboard template</p>
+            </a>
+            <a
+              href="https://github.com/abuhasanshadhin/inventory-ms"
+              target="_blank"
+              rel="noopener"
+              class="opensource-card"
+            >
+              <div class="opensource-header">
+                <i class="fas fa-boxes"></i>
+                <span class="opensource-lang">JS</span>
+              </div>
+              <h4>inventory-ms</h4>
+              <p>Inventory management system</p>
+            </a>
+            <a
+              href="https://github.com/abuhasanshadhin/vue-js-libs"
+              target="_blank"
+              rel="noopener"
+              class="opensource-card"
+            >
+              <div class="opensource-header">
+                <i class="fab fa-vuejs"></i>
+                <span class="opensource-lang">Vue</span>
+              </div>
+              <h4>vue-js-libs</h4>
+              <p>Vue.js component library</p>
+            </a>
+          </div>
+        </div>
+      </div>
+      <span class="section-close">&lt;/projects&gt;</span>
+    </section>
+
+    <!-- Education Section -->
+    <section class="section education" id="education">
+      <div class="section-divider"></div>
+      <div class="container">
+        <div class="section-header">
+          <span class="section-tag">&lt;education&gt;</span>
+          <h2 class="section-title">
+            My <span class="text-accent">Education</span>
+          </h2>
+          <div class="section-line"></div>
+        </div>
+        <div class="education-grid">
+          <div class="education-card" data-aos="fade-up">
+            <div class="education-icon">
+              <i class="fas fa-graduation-cap"></i>
+            </div>
+            <div class="education-content">
+              <span class="education-year">In Progress</span>
+              <h3>BSc in Computer Science & Engineering</h3>
+              <h4>Canadian University of Bangladesh</h4>
+              <p>
+                All coursework completed; final project submission in progress
+              </p>
+            </div>
+          </div>
+          <div class="education-card" data-aos="fade-up" data-aos-delay="100">
+            <div class="education-icon">
+              <i class="fas fa-university"></i>
+            </div>
+            <div class="education-content">
+              <span class="education-year">Completed</span>
+              <h3>Diploma in Computer Technology</h3>
+              <h4>Kurigram Polytechnic Institute</h4>
+            </div>
+          </div>
+          <div class="education-card" data-aos="fade-up" data-aos-delay="200">
+            <div class="education-icon">
+              <i class="fas fa-school"></i>
+            </div>
+            <div class="education-content">
+              <span class="education-year">Completed</span>
+              <h3>SSC (Science)</h3>
+              <h4>Gunaigach Pilot High School</h4>
+            </div>
+          </div>
+        </div>
+      </div>
+      <span class="section-close">&lt;/education&gt;</span>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="section contact" id="contact">
+      <div class="section-divider"></div>
+      <div class="container">
+        <div class="section-header">
+          <span class="section-tag">&lt;contact&gt;</span>
+          <h2 class="section-title">
+            Get In <span class="text-accent">Touch</span>
+          </h2>
+          <div class="section-line"></div>
+        </div>
+        <div class="contact-grid">
+          <div class="contact-info">
+            <h3>Let's work together!</h3>
+            <p>
+              I'm always open to discussing new projects, creative ideas, or
+              opportunities to be part of your vision. Feel free to reach out!
+            </p>
+            <div class="contact-items">
+              <div class="contact-item">
+                <div class="contact-item-icon">
+                  <i class="fas fa-envelope"></i>
+                </div>
+                <div class="contact-item-info">
+                  <span class="contact-item-label">Email</span>
+                  <a href="mailto:abuhasanshadhin@gmail.com"
+                    >abuhasanshadhin@gmail.com</a
+                  >
+                </div>
+              </div>
+              <div class="contact-item">
+                <div class="contact-item-icon">
+                  <i class="fas fa-phone"></i>
+                </div>
+                <div class="contact-item-info">
+                  <span class="contact-item-label">Phone</span>
+                  <a href="tel:+8801794867982">+880 1794-867982</a>
+                </div>
+              </div>
+              <div class="contact-item">
+                <div class="contact-item-icon">
+                  <i class="fas fa-map-marker-alt"></i>
+                </div>
+                <div class="contact-item-info">
+                  <span class="contact-item-label">Location</span>
+                  <span>Uttara, Dhaka, Bangladesh</span>
+                </div>
+              </div>
+            </div>
+            <div class="contact-social">
+              <a
+                href="https://github.com/abuhasanshadhin"
+                target="_blank"
+                rel="noopener"
+                class="social-link-large"
+              >
+                <i class="fab fa-github"></i>
+              </a>
+              <a
+                href="https://www.linkedin.com/in/abu-hasan-shadhin-098288185/"
+                target="_blank"
+                rel="noopener"
+                class="social-link-large"
+              >
+                <i class="fab fa-linkedin-in"></i>
+              </a>
+            </div>
+          </div>
+          <form class="contact-form" id="contactForm">
+            <!-- Honeypot spam protection - hidden from users -->
+            <div style="display: none" aria-hidden="true">
+              <input
+                type="text"
+                name="_gotcha"
+                tabindex="-1"
+                autocomplete="off"
+              />
+            </div>
+            <!-- Custom subject line for emails -->
+            <input
+              type="hidden"
+              name="_subject"
+              value="New message from portfolio"
+            />
+
+            <!-- Success message -->
+            <div class="form-message form-success" data-fs-success>
+              <i class="fas fa-check-circle"></i> Thanks! Your message has been
+              sent successfully.
+            </div>
+            <!-- Error message -->
+            <div class="form-message form-error-msg" data-fs-error>
+              <i class="fas fa-exclamation-circle"></i> Oops! Something went
+              wrong. Please try again.
+            </div>
+
+            <div class="form-group">
+              <label for="name">Your Name</label>
+              <div class="input-wrapper">
+                <i class="fas fa-user"></i>
+                <input
+                  type="text"
+                  id="name"
+                  name="name"
+                  placeholder="John Doe"
+                  required
+                  data-fs-field
+                />
+              </div>
+              <span class="field-error" data-fs-error="name"></span>
+            </div>
+            <div class="form-group">
+              <label for="email">Your Email</label>
+              <div class="input-wrapper">
+                <i class="fas fa-envelope"></i>
+                <input
+                  type="email"
+                  id="email"
+                  name="email"
+                  placeholder="john@example.com"
+                  required
+                  data-fs-field
+                />
+              </div>
+              <span class="field-error" data-fs-error="email"></span>
+            </div>
+            <div class="form-group">
+              <label for="subject">Subject</label>
+              <div class="input-wrapper">
+                <i class="fas fa-tag"></i>
+                <input
+                  type="text"
+                  id="subject"
+                  name="subject"
+                  placeholder="Project Discussion"
+                  required
+                  data-fs-field
+                />
+              </div>
+              <span class="field-error" data-fs-error="subject"></span>
+            </div>
+            <div class="form-group">
+              <label for="message">Message</label>
+              <div class="input-wrapper textarea-wrapper">
+                <i class="fas fa-comment"></i>
+                <textarea
+                  id="message"
+                  name="message"
+                  rows="5"
+                  placeholder="Tell me about your project..."
+                  required
+                  data-fs-field
+                ></textarea>
+              </div>
+              <span class="field-error" data-fs-error="message"></span>
+            </div>
+            <button
+              type="submit"
+              class="btn btn-primary btn-full"
+              data-fs-submit-btn
+            >
+              <i class="fas fa-paper-plane"></i> Send Message
+            </button>
+          </form>
+        </div>
+      </div>
+      <span class="section-close">&lt;/contact&gt;</span>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <div class="container">
+        <div class="footer-content">
+          <div class="footer-logo">
+            <span class="logo-bracket">&lt;</span>SHADHIN<span
+              class="logo-bracket"
+            >
+              /&gt;</span
+            >
+          </div>
+          <p class="footer-text">
+            Designed & Built by <strong>Abu Hasan Shadhin</strong>
+          </p>
+          <div class="footer-social">
+            <a
+              href="https://github.com/abuhasanshadhin"
+              target="_blank"
+              rel="noopener"
+              aria-label="GitHub"
+            >
+              <i class="fab fa-github"></i>
+            </a>
+            <a
+              href="https://www.linkedin.com/in/abu-hasan-shadhin-098288185/"
+              target="_blank"
+              rel="noopener"
+              aria-label="LinkedIn"
+            >
+              <i class="fab fa-linkedin-in"></i>
+            </a>
+            <a href="mailto:abuhasanshadhin@gmail.com" aria-label="Email">
+              <i class="fas fa-envelope"></i>
+            </a>
+          </div>
+          <p class="footer-copyright">
+            &copy; <span id="currentYear"></span> Abu Hasan Shadhin. All rights
+            reserved.
+          </p>
+        </div>
+      </div>
+    </footer>
+
+    <!-- Back to Top -->
+    <button class="back-to-top" id="backToTop" aria-label="Back to top">
+      <i class="fas fa-chevron-up"></i>
+    </button>
+
+    <script src="js/main.js"></script>
+    <!-- Formspree Ajax SDK -->
+    <script>
+      window.formspree =
+        window.formspree ||
+        function () {
+          (formspree.q = formspree.q || []).push(arguments);
+        };
+      formspree("initForm", {
+        formElement: "#contactForm",
+        formId: "xojgervj",
+      });
+    </script>
+    <script src="https://unpkg.com/@formspree/ajax@1" defer></script>
+  </body>
+</html>
