@@ -277,8 +277,7 @@ img {
     align-items: center;
     justify-content: center;
     position: relative;
-    overflow: hidden;
-    padding: 100px 24px 60px;
+    padding: 100px 24px 100px;
     background: linear-gradient(180deg, #fafbfd 0%, #f3f4f8 100%);
 }
 
@@ -458,9 +457,9 @@ img {
 
 .hero-actions {
     display: flex;
-    gap: 16px;
+    gap: 14px;
     justify-content: center;
-    margin-bottom: 40px;
+    margin-bottom: 28px;
     flex-wrap: wrap;
 }
 
@@ -494,18 +493,25 @@ img {
 /* Scroll Indicator */
 .scroll-indicator {
     position: absolute;
-    bottom: 40px;
+    bottom: 30px;
     left: 50%;
     transform: translateX(-50%);
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 8px;
+    gap: 6px;
     color: var(--text-muted) !important;
-    font-size: 0.75rem;
+    font-size: 0.7rem;
     letter-spacing: 2px;
     text-transform: uppercase;
     animation: fadeInUp 1s ease 1.5s both;
+    z-index: 10;
+    opacity: 0.6;
+    transition: opacity 0.3s;
+}
+
+.scroll-indicator:hover {
+    opacity: 1;
 }
 
 .mouse {
